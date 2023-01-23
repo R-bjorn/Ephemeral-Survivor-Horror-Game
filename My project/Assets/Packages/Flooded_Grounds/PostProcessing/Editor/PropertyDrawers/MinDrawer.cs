@@ -1,7 +1,7 @@
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.PostProcessing;
 
-namespace UnityEditor.PostProcessing
+namespace Flooded_Grounds.PostProcessing.Editor.PropertyDrawers
 {
     [CustomPropertyDrawer(typeof(MinAttribute))]
     sealed class MinDrawer : PropertyDrawer
