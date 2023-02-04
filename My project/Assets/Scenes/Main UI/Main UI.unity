@@ -205,6 +205,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 833130514}
     m_Modifications:
+    - target: {fileID: 2791795498024914449, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
+      propertyPath: m_Name
+      value: ExitGameButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791795498024914451, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
+      propertyPath: m_text
+      value: Exit Game
+      objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306008, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_Name
       value: Exit Game
@@ -271,7 +279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306010, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306010, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -283,7 +291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306010, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveToIntro1_0
+      value: ExitGame
       objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306010, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -367,7 +375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306011, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 93
+      value: -174
       objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306011, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -593,7 +601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306011, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 93
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306011, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1092,6 +1100,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 833130514}
     m_Modifications:
+    - target: {fileID: 2791795498024914449, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
+      propertyPath: m_Name
+      value: OptionButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791795498024914451, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
+      propertyPath: m_text
+      value: Options
+      objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306008, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_Name
       value: Options
@@ -1254,7 +1270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306011, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 93
+      value: -77
       objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306011, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1472,7 +1488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306011, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 93
+      value: 134
       objectReference: {fileID: 0}
     - target: {fileID: 2791795498050306011, guid: bb8f73a1d4d6c1d42991146ce895a2d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
