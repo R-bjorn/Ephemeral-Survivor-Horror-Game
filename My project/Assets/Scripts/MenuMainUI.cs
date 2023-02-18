@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuMainUI : MonoBehaviour
 {
-
-    public void MoveToIntro1_0(int scenetoChange)
+    public void MoveToScene(int scenetoChange)
     {
         SceneManager.LoadScene(scenetoChange);
     }

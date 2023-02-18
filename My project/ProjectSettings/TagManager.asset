@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Rain
+  - SelectedButton
   layers:
   - Default
   - TransparentFX
