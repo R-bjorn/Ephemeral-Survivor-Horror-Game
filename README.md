@@ -8,5 +8,5 @@
 
 ## UI for this game. 
  This is the main introduction when the game starts as the user starts playing the game.  
-![Game Background](https://user-images.githubusercontent.com/81584201/206886839-b3ecca1f-9d2a-4199-a2e9-1636fcfa400e.png)
 
+![image](https://user-images.githubusercontent.com/81584201/219817702-02ac0674-f359-4846-8aee-5c6fc8773406.png)
