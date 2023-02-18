@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1239583564}
-  maxDistance: 30
+  maxDistance: 5
   minDistance: 1
   audioSource: {fileID: 13049596}
 --- !u!82 &13049596
@@ -4095,7 +4095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1239583564}
-  maxDistance: 30
+  maxDistance: 10
   minDistance: 1
   audioSource: {fileID: 939139235}
 --- !u!82 &939139235
@@ -5242,7 +5242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1239583564}
-  maxDistance: 30
+  maxDistance: 20
   minDistance: 1
   audioSource: {fileID: 1344637817}
 --- !u!82 &1344637817 stripped
