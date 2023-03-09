@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuDisplay : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private string gameSceneName = "PlayerInput";
+    [SerializeField] private string gameSceneName = "CharacterSelection";
     
     public void Singleplayer()
     {

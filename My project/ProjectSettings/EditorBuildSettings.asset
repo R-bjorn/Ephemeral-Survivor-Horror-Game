@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu/MultiplayerMenu.unity
     guid: 520edf023939677479d37d28f6c337e0
   - enabled: 1
+    path: Assets/Scenes/Levels/Level 0/CharacterSelection.unity
+    guid: 3c2ed8e533cfc76408bfc0c0edbfb64e
+  - enabled: 1
     path: Assets/Scenes/Levels/Level 0/Introduction.unity
     guid: cd000eb9cbbd15b4eaf74cde25932941
   m_configObjects:
