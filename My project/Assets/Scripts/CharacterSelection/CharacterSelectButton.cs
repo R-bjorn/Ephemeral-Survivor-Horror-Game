@@ -15,7 +15,6 @@ public class CharacterSelectButton : MonoBehaviour
     public void SetCharacter(CharacterSelectDisplay characterSelect, Character character)
     {
         iconImage.sprite = character.Icon;
-        Debug.Log("Test");
 
         this.characterSelect = characterSelect;
 
@@ -24,7 +23,6 @@ public class CharacterSelectButton : MonoBehaviour
 
     public void SelectCharacter()
     {
-        Debug.Log("Tes2t");
         characterSelect.Select(Character);
     }
 
