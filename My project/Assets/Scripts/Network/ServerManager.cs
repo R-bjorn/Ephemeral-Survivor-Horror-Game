@@ -86,9 +86,11 @@ public class ServerManager : MonoBehaviour
 
     public void SetCharacter(ulong clientId, int characterId)
     {
+        Debug.Log("CHARACTER SET2");
         if (ClientData.TryGetValue(clientId, out ClientData data))
         {
             data.characterId = characterId;
+            Debug.Log("CHARACTER SET");
         }
     }
 
