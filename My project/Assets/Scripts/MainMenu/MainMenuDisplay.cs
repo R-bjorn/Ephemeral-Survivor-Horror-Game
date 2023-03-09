@@ -11,8 +11,7 @@ public class MainMenuDisplay : MonoBehaviour
     
     public void Singleplayer()
     {
-        NetworkManager.Singleton.StartHost();
-        NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
+        ServerManager.Instance.StartHost();
     }
     
     public void Multiplayer()
@@ -22,14 +21,12 @@ public class MainMenuDisplay : MonoBehaviour
 
     public void StartHost()
     {
-        NetworkManager.Singleton.StartHost();
-        NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
+        ServerManager.Instance.StartHost();
     }
 
     public void StartServer()
     {
-        NetworkManager.Singleton.StartServer();
-        NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
+        ServerManager.Instance.StartServer();
     }
 
     public void StartClient()
