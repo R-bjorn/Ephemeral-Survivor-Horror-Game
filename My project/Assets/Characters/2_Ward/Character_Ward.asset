@@ -16,4 +16,4 @@ MonoBehaviour:
   displayName: Ward
   icon: {fileID: 21300000, guid: b0fa70abd2a79904cb00b175dfd8ec7e, type: 3}
   introPrefab: {fileID: 2643458161797943648, guid: f11127c38a654d14b951dd25135f8754, type: 3}
-  gameplayPrefab: {fileID: -6966678841208975568, guid: 272b4047409dc064f9c3a830075e72c3, type: 3}
+  gameplayPrefab: {fileID: -978731255754319917, guid: 0063f97a7307a464cbe87b8ec057dea0, type: 3}

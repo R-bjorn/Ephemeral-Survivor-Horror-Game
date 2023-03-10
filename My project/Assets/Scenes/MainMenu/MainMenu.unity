@@ -394,9 +394,22 @@ MonoBehaviour:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 495386128}
     PlayerPrefab: {fileID: 0}
-    Prefabs:
-      NetworkPrefabsLists:
-      - {fileID: 11400000, guid: 621c1b49fe2ae9e46871fe45695da635, type: 2}
+    NetworkPrefabs:
+    - Override: 0
+      Prefab: {fileID: 9107826556515447290, guid: cf4b730d0d2a96049a93411134061cfc, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 5898159700553943477, guid: 0063f97a7307a464cbe87b8ec057dea0, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 761512924041242024, guid: b8a1d47647f5a724d97b86a9e9f74308, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 1
@@ -412,7 +425,6 @@ MonoBehaviour:
     LoadSceneTimeOut: 120
     SpawnTimeout: 1
     EnableNetworkLogs: 1
-    OldPrefabList: []
 --- !u!1 &498246004
 GameObject:
   m_ObjectHideFlags: 0

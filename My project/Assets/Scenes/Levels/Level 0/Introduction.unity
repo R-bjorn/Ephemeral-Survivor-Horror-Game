@@ -148,7 +148,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186915227}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &186915229
 Camera:
   m_ObjectHideFlags: 0
@@ -374,8 +374,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 2758199694
   AlwaysReplicateAsRoot: 0
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
 --- !u!4 &382443023
