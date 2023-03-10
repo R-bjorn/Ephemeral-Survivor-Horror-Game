@@ -3,6 +3,8 @@ using StarterAssets;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerStart : NetworkBehaviour
 {
@@ -12,11 +14,14 @@ public class PlayerStart : NetworkBehaviour
     void Start()
     {
         // Other players will not have input / camera
+        // TODO - change this, this is just temp fix
+        Invoke("checkOwner", 1);
+        
+    }
+
+    void checkOwner() {
         if (!IsOwner) return;
-        //if (!(OwnerClientId == NetworkManager.Singleton.LocalClientId)) return;
         // https://forum.unity.com/threads/isowner-is-not-set-to-true-when-spawning-object-with-ownership.1223982/
-
-
 
         // Enable cameras
         main.GetComponent<Camera>().enabled = true;
