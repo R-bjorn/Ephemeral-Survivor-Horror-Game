@@ -10,5 +10,9 @@ namespace Game_Manager.Mind.COMP499_Project.Game_Scripts
         public static double ZombieInteractRadius { get; set; }
         public static float HungerRestoredFromEatingZombie { get; set; }
         public static double HungerChance { get; set; }
+
+        public ZombieManager(NavigationLookup[] navigationTable) : base(navigationTable)
+        {
+        }
     }
 }

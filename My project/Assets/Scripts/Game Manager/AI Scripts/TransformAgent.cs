@@ -17,9 +17,8 @@ namespace Game_Manager.AI_Scripts
             transform.position += MoveVelocity3 * DeltaTime;
         }
 
-        public override void Perform()
+        public TransformAgent(Vector2 moveVelocity) : base(moveVelocity)
         {
-            throw new System.NotImplementedException();
         }
     }
 }

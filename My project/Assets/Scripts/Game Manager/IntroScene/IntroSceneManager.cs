@@ -4,7 +4,7 @@ using Game_Manager.AI_Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Game_Manager
+namespace Game_Manager.IntroScene
 {
     public class IntroSceneManager : Manager
     {
@@ -16,38 +16,45 @@ namespace Game_Manager
         [SerializeField] private List<Transform> pickupLocationsList;
         [SerializeField] private GameObject enemyObject;
         // [SerializeField] private State enemyMindControl;
-        [SerializeField] private List<Transform> enemySpawnLocations;
+        [SerializeField] private Transform enemySpawnLocations;
         [SerializeField] private GameObject playerUI;
         [SerializeField] private Transform endLocation;
         
         private GameObject _environmentInstance;
         private GameObject _playerInstance;
+        private Transform _endLocationInstance;
+        private Transform[] EnemySpawnLocation => enemySpawnLocations.GetComponentsInChildren<Transform>();
         private readonly List<GameObject> _pickupsInstances = new List<GameObject>();
         private readonly List<GameObject> _enemiesInstances = new List<GameObject>();
         // private int _score = 0;
 
         private void Start()
         {
+            // Locks the cursor
+            Cursor.lockState = CursorLockMode.Locked;
             // Instantiate the environment prefab
             _environmentInstance = Instantiate(environmentPrefab);
 
             // Spawn the player at the player spawn location
             _playerInstance = Instantiate(player, playerSpawnLocation.position, playerSpawnLocation.rotation);
 
+            // Spawn the end location detector for moving to next scene
+            _endLocationInstance =
+                // ReSharper disable once Unity.InefficientPropertyAccess
+                Instantiate(endLocation, endLocation.transform.position, endLocation.transform.rotation);
+            
             // Spawn the pickups at the pre-defined locations
             foreach (var pickupInstance in pickupLocationsList.Select(t => Instantiate(pickupsList[Random.Range(0, pickupsList.Count)], t.position, Quaternion.identity)))
             {
                 _pickupsInstances.Add(pickupInstance);
             }
 
+            
             // Spawn the enemies at the pre-defined locations
-            foreach (var enemyInstance in enemySpawnLocations.Select(t => Instantiate(enemyObject, t.position, t.rotation)))
+            foreach (var enemyInstance in EnemySpawnLocation.Select(t => Instantiate(enemyObject, t.position, t.rotation)))
             {
                 _enemiesInstances.Add(enemyInstance);
             }
-
-            // Start controlling the enemy mind
-            // enemyMindControl.GetComponent<EnemyMindControl>().StartControl();
 
             // Update the player UI score
             // playerUI.GetComponent<PlayerUI>().UpdateScore(_score);
@@ -78,7 +85,11 @@ namespace Game_Manager
             }
 
             // Load the next level
-            SceneManager.LoadScene("Level1");
+            SceneManager.LoadScene("Level1.0");
+        }
+
+        public IntroSceneManager(NavigationLookup[] navigationTable) : base(navigationTable)
+        {
         }
     }
 }

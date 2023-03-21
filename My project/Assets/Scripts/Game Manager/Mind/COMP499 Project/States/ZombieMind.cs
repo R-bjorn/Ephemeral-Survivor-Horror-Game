@@ -17,7 +17,6 @@ namespace Game_Manager.Mind.COMP499_Project.States
 
         public override void Execute(Agent agent)
         {
-            return;
         }
     }
 }

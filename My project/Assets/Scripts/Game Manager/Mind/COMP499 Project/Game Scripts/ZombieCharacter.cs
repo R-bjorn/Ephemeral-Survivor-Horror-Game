@@ -156,5 +156,9 @@ namespace Game_Manager.Mind.COMP499_Project.Game_Scripts
         {
             base.Start();
         }
+
+        public ZombieCharacter(Vector2 moveVelocity) : base(moveVelocity)
+        {
+        }
     }
 }

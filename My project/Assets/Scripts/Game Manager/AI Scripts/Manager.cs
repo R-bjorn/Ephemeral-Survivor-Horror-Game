@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
+// using Unity.Mathematics;
 
 namespace Game_Manager.AI_Scripts
 {
@@ -41,17 +41,90 @@ namespace Game_Manager.AI_Scripts
         [Min(0)]
         [SerializeField]
         private int maxMessages = 100;
+        
+        [Tooltip("How far an agent can be to a location its fleeing or evading from to declare it as reached. Set negative for none.")]
+        [SerializeField]
+        private float fleeAcceptableDistance = 10f;
+        
+        [Tooltip("How close an agent can be to a location its seeking or pursuing to declare it as reached. Set negative for none.")]
+        [SerializeField]
+        private float seekAcceptableDistance = 0.1f;
     
+        [Tooltip("The radius of agents. This is for connecting navigation nodes to ensure enough space for movement.")]
+        [Min(0)]
+        [SerializeField]
+        private float navigationRadius = 0.5f;
+        
+        [Tooltip(
+            "How much height difference can there be between string pulls, set to zero for no limit.\n" +
+            "Increase this value if generated paths are being generated between too high of slopes/stairs."
+        )]
+        [Min(0)]
+        [SerializeField]
+        private float pullMaxHeight;
+        
+        [Header("Visualization")]
+        
+        [Tooltip("The currently selected camera. Set this to start with that camera active. Leaving empty will default to the first camera by alphabetic order.")]
+        
+        [SerializeField]
+        private Camera selectedCamera;
+        
+        [Tooltip("Which layers are obstacles that nodes cannot be placed on.")]
+        [SerializeField]
+        private LayerMask obstacleLayers;
+        
+        [Header("Navigation")]
+        [Tooltip("Which layers can nodes be placed on.")]
+        [SerializeField]
+        private LayerMask groundLayers;
+        
         /// <summary>
         /// Determine what mode messages are stored in.
         /// </summary>
         public static MessagingMode MessageMode => _singleton._messageMode;
     
         /// <summary>
+        /// Which layers are obstacles that nodes cannot be placed on.
+        /// </summary>
+        public static LayerMask ObstacleLayers => _singleton.obstacleLayers;
+        
+        /// <summary>
+        /// List of all navigation nodes.
+        /// </summary>
+        private readonly List<Vector3> _nodes = new List<Vector3>();
+        
+        /// <summary>
+        /// How wide is the agent radius for connecting nodes to ensure enough space for movement.
+        /// </summary>
+        public static float NavigationRadius => _singleton.navigationRadius;
+        
+        /// <summary>
+        
+        /// How close an agent can be to a location its seeking or pursuing to declare it as reached.
+        
+        /// </summary>
+        public static float SeekAcceptableDistance => _singleton.seekAcceptableDistance;
+        
+        /// <summary>
+        /// The currently selected camera.
+        /// </summary>
+        public static Camera SelectedCamera => _singleton.selectedCamera;
+        /// <summary>
         /// All agents which move during an update tick.
         /// </summary>
         private readonly List<Agent> _updateAgents = new List<Agent>();
     
+        /// <summary>
+        /// Which layers can nodes be placed on.
+        /// </summary>
+        public static LayerMask GroundLayers => _singleton.groundLayers;
+        
+        /// <summary>
+        /// How far an agent can be to a location its fleeing or evading from to declare it as reached.
+        /// </summary>
+        public static float FleeAcceptableDistance => _singleton.fleeAcceptableDistance;
+        
         /// <summary>
         /// The mind or global state agents are in
         /// </summary>
@@ -60,8 +133,13 @@ namespace Game_Manager.AI_Scripts
         /// <summary>
         /// All agents which move during a fixed update tick.
         /// </summary>
-        [FormerlySerializedAs("_fixedUpdateAgents")] [SerializeField] private List<Agent> fixedUpdateAgents = new List<Agent>();
-    
+        [SerializeField] private List<Agent> fixedUpdateAgents = new List<Agent>();
+        
+        /// <summary>
+        /// How much height difference can there be between string pulls.
+        /// </summary>
+        public static float PullMaxHeight => _singleton.pullMaxHeight;
+        
         /// <summary>
         /// All cameras in the scene.
         /// </summary>
@@ -86,9 +164,189 @@ namespace Game_Manager.AI_Scripts
         )]
         private MessagingMode _messageMode = MessagingMode.Compact;
 
+        /// <summary>
+        /// The navigation lookup table.
+        /// </summary>
+        private readonly NavigationLookup[] _navigationTable;
+        
+        
         private void Awake()
+        
         {
+        
             _singleton = GetComponent<Manager>();
+        }
+        
+        /// <summary>
+        /// Find the nearest node to a position.
+        /// </summary>
+        /// <param name="position">The position to find the nearest node to.</param>
+        /// <returns></returns>
+        private static Vector3 Nearest(Vector3 position)
+        {
+            // Order all nodes by distance to the position.
+            List<Vector3> potential = _singleton._nodes.OrderBy(n => Vector3.Distance(n, position)).ToList();
+            foreach (Vector3 node in potential)
+            {
+                // If the node is directly at the position, return it.
+                if (node == position)
+                {
+                    return node;
+                }
+            
+                // Otherwise if there is a line of sight to the node, return it.
+                if (_singleton.navigationRadius <= 0)
+                {
+                    if (!Physics.Linecast(position, node, _singleton.obstacleLayers))
+                    {
+                        return node;
+                    }
+                    
+                    continue;
+                }
+
+                Vector3 p1 = position;
+                p1.y += _singleton.navigationRadius;
+                Vector3 p2 = node;
+                p2.y += _singleton.navigationRadius;
+                if (!Physics.SphereCast(p1, _singleton.navigationRadius, (p2 - p1).normalized, out _, Vector3.Distance(p1, p2), _singleton.obstacleLayers))
+                {
+                    return node;
+                }
+            }
+
+            // If no nodes are in line of sight, return the nearest node even though it is not in line of sight.
+            return potential.First();
+        }
+        
+        /// <summary>
+        /// Lookup a path to take from a starting position to an end goal.
+        /// </summary>
+        /// <param name="position">The starting position.</param>
+        /// <param name="goal">The end goal position.</param>
+        /// <returns>A list of the points to move to to reach the goal destination.</returns>
+        public static List<Vector3> LookupPath(Vector3 position, Vector3 goal)
+        {
+            // If there are no nodes in the lookup table simply return the end goal position.
+            if (_singleton._nodes.Count == 0)
+            {
+                return new List<Vector3>() { goal };
+            }
+            
+            // Check if there is a direct line of sight so we can skip pathing and just move directly towards the goal.
+            if (_singleton.navigationRadius <= 0)
+            {
+                if (!Physics.Linecast(position, goal, _singleton.obstacleLayers))
+                {
+                    return new List<Vector3>() { goal };
+                }
+            }
+            else
+            {
+                Vector3 p1 = position;
+                p1.y += _singleton.navigationRadius;
+                Vector3 p2 = goal;
+                p2.y += _singleton.navigationRadius;
+                if (!Physics.SphereCast(p1, _singleton.navigationRadius, (p2 - p1).normalized, out _, Vector3.Distance(p1, p2), _singleton.obstacleLayers))
+                {
+                    return new List<Vector3>() { goal };
+                }
+            }
+        
+            // Get the starting node and end nodes closest to their positions.
+            Vector3 nodePosition = Nearest(position);
+            Vector3 nodeGoal = Nearest(goal);
+
+            // Add the starting position to the path.
+            List<Vector3> path = new List<Vector3>() { position };
+        
+            // If the first node is not the same as the starting position, add it as well.
+            if (nodePosition != position)
+            {
+                path.Add(nodePosition);
+            }
+
+            // Loop until the path is finished or the end goal cannot be reached.
+            while (true)
+            {
+                try
+                {
+                    // Get the next node to move to.
+                    NavigationLookup lookup = _singleton._navigationTable.First(l => Equals(l.Current, nodePosition) && Equals(l.Goal, nodeGoal));
+                
+                    // If the node is the goal destination, all nodes in the path have been finished so stop the loop.
+                    if (lookup.next == nodeGoal)
+                    {
+                        break;
+                    }
+                
+                    // Move to the next node and add it to the path.
+                    nodePosition = lookup.next;
+                    path.Add(nodePosition);
+                }
+                catch
+                {
+                    break;
+                }
+            }
+        
+            // Add the goal node to the path.
+            path.Add(nodeGoal);
+        
+            // If the goal node and the goal itself are not the same, add the goal itself to the path as well.
+            if (goal != nodeGoal)
+            {
+                path.Add(goal);
+            }
+
+            // Try to pull the string from both sides.
+            StringPull(path);
+            path.Reverse();
+            StringPull(path);
+            path.Reverse();
+
+            return path;
+        }
+        
+        /// <summary>
+        /// Perform string pulling to shorten a path. Path list does not need to be returned, simply remove nodes from it.
+        /// </summary>
+        /// <param name="path">The path to shorten.</param>
+        private static void StringPull(IList<Vector3> path)
+        {
+            // Loop through every point in the path less two as there must be at least two points in a path.
+            for (int i = 0; i < path.Count - 2; i++)
+            {
+                // Inner loop from two points ahead of the outer loop to check if a node can be skipped.
+                for (int j = i + 2; j < path.Count; j++)
+                {
+                    // Do not string pull for multi-level paths as these could skip over objects that require stairs.
+                    /** if (math.abs(path[i].y - path[j].y) > Manager.PullMaxHeight)
+                    {
+                        continue;
+                    }  **/
+                
+                    // If a node can be skipped as there is line of sight without it, remove it.
+                    if (Manager.NavigationRadius <= 0)
+                    {
+                        if (!Physics.Linecast(path[i], path[j], Manager.ObstacleLayers))
+                        {
+                            path.RemoveAt(j-- - 1);
+                        }
+                        
+                        continue;
+                    }
+
+                    Vector3 p1 = path[i];
+                    p1.y += NavigationRadius;
+                    Vector3 p2 = path[j];
+                    p2.y += Manager.NavigationRadius;
+                    if (!Physics.SphereCast(p1, Manager.NavigationRadius, (p2 - p1).normalized, out _, Vector3.Distance(p1, p2), Manager.ObstacleLayers))
+                    {
+                        path.RemoveAt(j-- - 1);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -187,7 +445,12 @@ namespace Game_Manager.AI_Scripts
         /// The agent which is currently thinking.
         /// </summary>
         private int _currentAgentIndex;
-        
+
+        public Manager(NavigationLookup[] navigationTable)
+        {
+            _navigationTable = navigationTable;
+        }
+
         /// <summary>
         /// Go to the next agent.
         /// </summary>

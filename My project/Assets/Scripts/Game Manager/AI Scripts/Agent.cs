@@ -12,6 +12,109 @@ namespace Game_Manager.AI_Scripts
     [DisallowMultipleComponent]
     public abstract class Agent : MessageComponent
     {
+        
+        /// <summary>
+        /// Class to store all targets the agent is moving in relation to.
+        /// </summary>
+        private abstract class Movement
+        {
+            /// <summary>
+            /// The transform to move in relation to.
+            /// </summary>
+            private readonly Transform _transform;
+
+            /// <summary>
+            /// True if this move data was setup with a transform so if at any point the transform is destroyed this is removed as well.
+            /// </summary>
+#pragma warning disable 414
+            private readonly bool _isTransformTarget;
+#pragma warning restore 414
+            
+            /// <summary>
+            /// Store the position which is only used if the transform is null.
+            /// </summary>
+            private readonly Vector2 _position;
+
+            /// <summary>
+            /// How much time has elapsed since the last time this was called for predictive move types.
+            /// </summary>
+            private float _deltaTime;
+
+            /// <summary>
+            /// The movement vector for visualizing move data.
+            /// </summary>
+            public Vector2 MoveVector = Vector2.zero;
+        
+            /// <summary>
+            /// Get the position of the transform if it has one otherwise the position it was set to have.
+            /// </summary>
+            public Vector2 Position
+            {
+                get
+                {
+                    if (_transform == null)
+                    {
+                        return _position;
+                    }
+
+                    var pos3 = _transform.position;
+                    return new Vector2(pos3.x, pos3.z);
+                }
+            }
+
+            /// <summary>
+            /// Create a move data for a transform.
+            /// </summary>
+            /// <param name="behaviour">The move type.</param>
+            /// <param name="transform">The transform.</param>
+            protected Movement(Steering.Behaviour behaviour, Transform transform, float deltaTime)
+            {
+                _transform = transform;
+                _deltaTime = deltaTime;
+                var pos3 = transform.position;
+                _position = new Vector2(pos3.x, pos3.z);
+                _isTransformTarget = true;
+            }
+
+            /// <summary>
+            /// Create a move data for a position.
+            /// </summary>
+            /// <param name="behaviour">The move type.</param>
+            /// <param name="position">The position.</param>
+            protected Movement(Steering.Behaviour behaviour, Vector2 position, float deltaTime)
+            {
+                // Since pursuit and evade are for moving objects and this is only with a static position,
+                // switch pursuit to seek and evade to flee.
+                behaviour = behaviour switch
+                {
+                    Steering.Behaviour.Pursue => Steering.Behaviour.Seek,
+                    Steering.Behaviour.Evade => Steering.Behaviour.Flee,
+                    _ => behaviour
+                };
+
+                _transform = null;
+                _position = position;
+                _deltaTime = deltaTime;
+                _isTransformTarget = false;
+            }
+        }
+
+        /// <summary>
+        /// The actions of this agent that are not yet completed.
+        /// </summary>
+        // ReSharper disable once CollectionNeverUpdated.Local
+        private readonly List<object> _inProgressActions = new List<object>();
+
+        protected Agent(Vector2 moveVelocity)
+        {
+            MoveVelocity = moveVelocity;
+        }
+
+        /// <summary>
+        /// The current path an agent is following.
+        /// </summary>
+        private List<Vector3> Path { get; set; } = new List<Vector3>();
+
         /// <summary>
         /// The current move velocity if move acceleration is being used.
         /// </summary>
@@ -26,8 +129,13 @@ namespace Game_Manager.AI_Scripts
         /// The state the agent is in.
         /// </summary>
         private State State { get; set; }
-        
-        
+
+        /// <summary>
+        /// All movement the agent is doing without path finding.
+        /// </summary>
+        // ReSharper disable once CollectionNeverUpdated.Local
+        private List<Movement> Moves { get; } = new List<Movement>();
+
         /// <summary>
         /// The sensors of this agent.
         /// </summary>
@@ -52,7 +160,13 @@ namespace Game_Manager.AI_Scripts
         /// </summary>
         protected Vector3 MoveVelocity3 => new Vector3(MoveVelocity.x, 0, MoveVelocity.y);
 
+        /// <summary>
+        /// The path destination.
+        /// </summary>
+        private Vector3? Destination => Path.Count > 0 ? Path[-1] : (Vector3?)null;
     
+        
+        
         /// <summary>
         /// Implement movement behaviour.
         /// </summary>
@@ -78,39 +192,89 @@ namespace Game_Manager.AI_Scripts
         }
         
         /// <summary>
+        /// Clear all move data.
+        /// </summary>
+        private void StopMoving()
+        {
+            Moves.Clear();
+        }
+
+        /// <summary>
+        /// Calculate a path towards a position.
+        /// </summary>
+        /// <param name="goal">The position to navigate to.</param>
+        /// <returns>True if the path has been set, false if the agent was already navigating towards this point.</returns>
+        private void Navigate(Vector3 goal)
+        {
+            if (Destination == goal)
+            {
+                return;
+            }
+        
+            Path = Manager.LookupPath(transform.position, goal);
+        }
+        
+        /// <summary>
         /// Called by the AgentManager to have the agent sense, think, and act.
         /// </summary>
         public virtual void Perform()
         {
-            // if (Manager.Mind != null)
-            // {
-            //     Manager.Mind.Execute(this);
-            // }
-            // else
-            // {
-            //     if (Manager.CurrentlySelectedAgent == this && Mouse.current.rightButton.wasPressedThisFrame && Physics.Raycast(Manager.SelectedCamera.ScreenPointToRay(new(Mouse.current.position.x.ReadValue(), Mouse.current.position.y.ReadValue(), 0)), out RaycastHit hit, Mathf.Infinity, Manager.GroundLayers | Manager.ObstacleLayers))
-            //     {
-            //         StopMoving();
-            //         Navigate(hit.point);
-            //     }
-            // }
-            //
-            // if (State != null)
-            // {
-            //     State.Execute(this);
-            // }
-            //
-            // // Act on the actions.
-            // ActIncomplete();
-            //
-            // // After all actions are performed, calculate the agent's new performance.
-            // if (PerformanceMeasure != null)
-            // {
-            //     Performance = PerformanceMeasure.CalculatePerformance();
-            // }
-            //
-            // // Reset the elapsed time for the next time this method is called.
-            // DeltaTime = 0;
+            if (Manager.Mind != null)
+            {
+                Manager.Mind.Execute(this);
+            }
+            else
+            {
+                if (Manager.CurrentlySelectedAgent == this && Mouse.current.rightButton.wasPressedThisFrame && Physics.Raycast(Manager.SelectedCamera.ScreenPointToRay(new Vector3(Mouse.current.position.x.ReadValue(), Mouse.current.position.y.ReadValue(), 0)), out RaycastHit hit, Mathf.Infinity, Manager.GroundLayers | Manager.ObstacleLayers))
+                {
+                    StopMoving();
+                    Navigate(hit.point);
+                }
+            }
+            
+            if (State != null)
+            {
+                State.Execute(this);
+            }
+            
+            // Act on the actions.
+            ActIncomplete();
+            
+            // After all actions are performed, calculate the agent's new performance.
+            if (PerformanceMeasure != null)
+            {
+                PerformanceMeasure.CalculatePerformance();
+            }
+            
+            // Reset the elapsed time for the next time this method is called.
+            DeltaTime = 0;
+        }
+        
+        /// <summary>
+        /// Perform actions that are still incomplete.
+        /// </summary>
+        private void ActIncomplete()
+        {
+            for (int i = 0; i < _inProgressActions.Count; i++)
+            {
+                bool completed = false;
+                
+                foreach (Actuator actuator in Actuators)
+                {
+                    completed = actuator.Act(_inProgressActions[i]);
+                    if (completed)
+                    {
+                        break;
+                    }
+                }
+
+                if (!completed)
+                {
+                    continue;
+                }
+
+                _inProgressActions.RemoveAt(i--);
+            }
         }
         
         /// <summary>
