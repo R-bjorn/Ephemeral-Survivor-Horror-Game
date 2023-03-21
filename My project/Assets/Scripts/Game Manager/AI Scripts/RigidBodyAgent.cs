@@ -41,7 +41,7 @@ namespace Game_Manager.AI_Scripts
             }
         
             CalculateMoveVelocity(Time.fixedDeltaTime);
-            _rigidbody.velocity = new(MoveVelocity.x, _rigidbody.velocity.y, MoveVelocity.y);
+            _rigidbody.velocity = new Vector3(MoveVelocity.x, _rigidbody.velocity.y, MoveVelocity.y);
         }
     }
 }

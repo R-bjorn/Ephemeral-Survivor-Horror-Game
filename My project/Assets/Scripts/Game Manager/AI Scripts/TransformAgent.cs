@@ -17,7 +17,7 @@ namespace Game_Manager.AI_Scripts
             transform.position += MoveVelocity3 * DeltaTime;
         }
 
-        public virtual void Perform()
+        public override void Perform()
         {
             throw new System.NotImplementedException();
         }

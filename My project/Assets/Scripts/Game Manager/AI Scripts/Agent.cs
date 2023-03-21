@@ -15,42 +15,43 @@ namespace Game_Manager.AI_Scripts
         /// <summary>
         /// The current move velocity if move acceleration is being used.
         /// </summary>
-        public Vector2 MoveVelocity { get; protected set; }
+        protected Vector2 MoveVelocity { get; set; }
 
         /// <summary>
         /// The time passed since the last time the agent's mind made decisions. Use this instead of Time.DeltaTime.
         /// </summary>
-        public float DeltaTime { get; private set; }
+        protected float DeltaTime { get; private set; }
     
         /// <summary>
         /// The state the agent is in.
         /// </summary>
-        public State State { get; private set; }
+        private State State { get; set; }
         
         
         /// <summary>
         /// The sensors of this agent.
         /// </summary>
-        public Sensor[] Sensors { get; private set; } 
+        private Sensor[] Sensors { get; set; } 
         /// <summary>
         /// The actuators of this agent.
         /// </summary>
-        public Actuator[] Actuators { get; private set; }
+        private Actuator[] Actuators { get; set; }
         
         /// <summary>
         /// The root transform that holds the visuals for this agent used to rotate the agent towards its look target.
         /// </summary>
-        public Transform Visuals { get; private set; }
+        private Transform Visuals { get; set; }
         
         /// <summary>
         /// The performance measure of this agent.
         /// </summary>
-        public PerformanceMeasure PerformanceMeasure { get; private set; }
-        
+        private PerformanceMeasure PerformanceMeasure { get; set; }
+
         /// <summary>
         /// The current move velocity if move acceleration is being used as a Vector3.
         /// </summary>
-        public Vector3 MoveVelocity3 => new(MoveVelocity.x, 0, MoveVelocity.y);
+        protected Vector3 MoveVelocity3 => new Vector3(MoveVelocity.x, 0, MoveVelocity.y);
+
     
         /// <summary>
         /// Implement movement behaviour.
@@ -183,7 +184,7 @@ namespace Game_Manager.AI_Scripts
             Transform[] children = GetComponentsInChildren<Transform>();
             if (children.Length == 0)
             {
-                GameObject go = new("Visuals");
+                GameObject go = new GameObject("Visuals");
                 Visuals = go.transform;
                 go.transform.parent = transform;
                 go.transform.localPosition = Vector3.zero;

@@ -15,7 +15,7 @@ namespace Game_Manager
         [SerializeField] private List<GameObject> pickupsList;
         [SerializeField] private List<Transform> pickupLocationsList;
         [SerializeField] private GameObject enemyObject;
-        [SerializeField] private State enemyMindControl;
+        // [SerializeField] private State enemyMindControl;
         [SerializeField] private List<Transform> enemySpawnLocations;
         [SerializeField] private GameObject playerUI;
         [SerializeField] private Transform endLocation;
@@ -24,7 +24,7 @@ namespace Game_Manager
         private GameObject _playerInstance;
         private readonly List<GameObject> _pickupsInstances = new List<GameObject>();
         private readonly List<GameObject> _enemiesInstances = new List<GameObject>();
-        private int _score = 0;
+        // private int _score = 0;
 
         private void Start()
         {

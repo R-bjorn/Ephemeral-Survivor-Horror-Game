@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Game_Manager.AI_Scripts
 {
+    [RequireComponent(typeof(Manager))]
     public class Manager : MonoBehaviour
     {
         /// <summary>
@@ -24,12 +25,12 @@ namespace Game_Manager.AI_Scripts
         /// <summary>
         /// The global messages.
         /// </summary>
-        private List<string> _globalMessages = new();
+        private List<string> _globalMessages = new List<string>(0);
     
         /// <summary>
         /// All agents in the scene.
         /// </summary>
-        public List<Agent> Agents { get; private set; } = new();
+        private List<Agent> Agents { get; set; } = new List<Agent>(0);
     
         [Header("Agents")]
         [Tooltip("The mind or global state agents are in. Initialize it with the global state to start it. If left empty the agent will have manual right-click-to-move controls.")]
@@ -44,37 +45,38 @@ namespace Game_Manager.AI_Scripts
         /// <summary>
         /// Determine what mode messages are stored in.
         /// </summary>
-        public static MessagingMode MessageMode => Singleton._messageMode;
+        public static MessagingMode MessageMode => _singleton._messageMode;
     
         /// <summary>
         /// All agents which move during an update tick.
         /// </summary>
-        private readonly List<Agent> _updateAgents = new();
+        private readonly List<Agent> _updateAgents = new List<Agent>();
     
         /// <summary>
         /// The mind or global state agents are in
         /// </summary>
-        public static State Mind => Singleton.mind;
+        public static State Mind => _singleton.mind;
     
         /// <summary>
         /// All agents which move during a fixed update tick.
         /// </summary>
-        private readonly List<Agent> _fixedUpdateAgents = new();
+        [FormerlySerializedAs("_fixedUpdateAgents")] [SerializeField] private List<Agent> fixedUpdateAgents = new List<Agent>();
     
         /// <summary>
         /// All cameras in the scene.
         /// </summary>
+        // ReSharper disable once NotAccessedField.Local
         private Camera[] _cameras = Array.Empty<Camera>();
     
         /// <summary>
         /// The singleton agent manager.
         /// </summary>
-        protected static Manager Singleton;
+        private static Manager _singleton;
     
         /// <summary>
         /// The maximum number of messages any component can hold.
         /// </summary>
-        public static int MaxMessages => Singleton.maxMessages;
+        public static int MaxMessages => _singleton.maxMessages;
     
         [Tooltip(
             "Determine what mode messages are stored in.\n" +
@@ -83,13 +85,18 @@ namespace Game_Manager.AI_Scripts
             "Unique - No messages will be duplicated with the prior instance of the message being removed from its list when an identical message is added again."
         )]
         private MessagingMode _messageMode = MessagingMode.Compact;
-    
+
+        private void Awake()
+        {
+            _singleton = GetComponent<Manager>();
+        }
+
         /// <summary>
         /// Find all cameras in the scene so buttons can be setup for them.
         /// </summary>
         private static void FindCameras()
         {
-            Singleton._cameras = FindObjectsOfType<Camera>().OrderBy(c => c.name).ToArray();
+            _singleton._cameras = FindObjectsOfType<Camera>().OrderBy(c => c.name).ToArray();
         }
         
         /// <summary>
@@ -97,7 +104,7 @@ namespace Game_Manager.AI_Scripts
         /// </summary>
         public static void RefreshAgents()
         {
-            foreach (Agent agent in Singleton.Agents)
+            foreach (Agent agent in _singleton.Agents)
             {
                 agent.Setup();
             }
@@ -109,22 +116,19 @@ namespace Game_Manager.AI_Scripts
         /// <param name="message">The message to add.</param>
         public static void GlobalLog(string message)
         {
-            switch (Singleton._messageMode)
+            switch (_singleton._messageMode)
             {
-                case MessagingMode.Compact when Singleton._globalMessages.Count > 0 && Singleton._globalMessages[0] == message:
+                case MessagingMode.Compact when _singleton._globalMessages.Count > 0 && _singleton._globalMessages[0] == message:
                     return;
                 case MessagingMode.Unique:
-                    Singleton._globalMessages = Singleton._globalMessages.Where(m => m != message).ToList();
-                    break;
-                case MessagingMode.All:
-                default:
+                    _singleton._globalMessages = _singleton._globalMessages.Where(m => m != message).ToList();
                     break;
             }
 
-            Singleton._globalMessages.Insert(0, message);
-            if (Singleton._globalMessages.Count > MaxMessages)
+            _singleton._globalMessages.Insert(0, message);
+            if (_singleton._globalMessages.Count > MaxMessages)
             {
-                Singleton._globalMessages.RemoveAt(Singleton._globalMessages.Count - 1);
+                _singleton._globalMessages.RemoveAt(_singleton._globalMessages.Count - 1);
             }
         }
 
@@ -135,20 +139,20 @@ namespace Game_Manager.AI_Scripts
         public static void AddAgent(Agent agent)
         {
             // Ensure the agent is only added once.
-            if (Singleton.Agents.Contains(agent))
+            if (_singleton.Agents.Contains(agent))
             {
                 return;
             }
             
             // Add to their movement handling list.
-            Singleton.Agents.Add(agent);
+            _singleton.Agents.Add(agent);
             switch (agent)
             {
                 case TransformAgent updateAgent:
-                    Singleton._updateAgents.Add(updateAgent);
+                    _singleton._updateAgents.Add(updateAgent);
                     break;
                 case RigidbodyAgent fixedUpdateAgent:
-                    Singleton._fixedUpdateAgents.Add(fixedUpdateAgent);
+                    _singleton.fixedUpdateAgents.Add(fixedUpdateAgent);
                     break;
             }
             
@@ -167,17 +171,17 @@ namespace Game_Manager.AI_Scripts
         /// <summary>
         /// All registered states.
         /// </summary>
-        private static readonly Dictionary<Type, State> RegisteredStates = new();
+        private static readonly Dictionary<Type, State> RegisteredStates = new Dictionary<Type, State>();
         
         /// <summary>
         /// The currently selected agent.
         /// </summary>
-        protected Agent SelectedAgent;
+        private Agent _selectedAgent;
         
         /// <summary>
         /// The currently selected agent.
         /// </summary>
-        public static Agent CurrentlySelectedAgent => Singleton.SelectedAgent;
+        public static Agent CurrentlySelectedAgent => _singleton._selectedAgent;
         
         /// <summary>
         /// The agent which is currently thinking.
@@ -245,55 +249,53 @@ namespace Game_Manager.AI_Scripts
             
             if (Agents.Count == 1)
             {
-                SelectedAgent = Agents[0];
+                _selectedAgent = Agents[0];
             }
 
-            if (Time.timeScale != 0)
+            if (Time.timeScale == 0) return;
+            // Perform for all agents if there is no limit or only the next allowable number of agents if there is.
+            if (maxAgentsPerUpdate <= 0)
             {
-                // Perform for all agents if there is no limit or only the next allowable number of agents if there is.
-                if (maxAgentsPerUpdate <= 0)
+                // Keep as for loop and don't turn into a foreach in case agents destroy each other.
+                foreach (var t in Agents)
                 {
-                    // Keep as for loop and don't turn into a foreach in case agents destroy each other.
-                    for (int i = 0; i < Agents.Count; i++)
+                    try
                     {
-                        try
-                        {
-                            Agents[i].Perform();
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.LogError(e);
-                        }
+                        t.Perform();
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError(e);
                     }
                 }
-                else
-                {
-                    for (int i = 0; i < maxAgentsPerUpdate; i++)
-                    {
-                        try
-                        {
-                            Agents[_currentAgentIndex].Perform();
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.LogError(e);
-                        }
-                
-                        NextAgent();
-                    }
-                }
-
-                // Update the delta time for all agents and look towards their targets.
-                foreach (Agent agent in Agents)
-                {
-                    agent.IncreaseDeltaTime();
-                    // agent.LookCalculations();
-                }
-
-                // Move agents that do not require physics.
-                MoveAgents(_updateAgents);
             }
-            
+            else
+            {
+                for (int i = 0; i < maxAgentsPerUpdate; i++)
+                {
+                    try
+                    {
+                        Agents[_currentAgentIndex].Perform();
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError(e);
+                    }
+                
+                    NextAgent();
+                }
+            }
+
+            // Update the delta time for all agents and look towards their targets.
+            foreach (Agent agent in Agents)
+            {
+                agent.IncreaseDeltaTime();
+                // agent.LookCalculations();
+            }
+
+            // Move agents that do not require physics.
+            MoveAgents(_updateAgents);
+
 
             // // Click to select an agent.
             // if (Mouse.current.leftButton.wasPressedThisFrame && Physics.Raycast(selectedCamera.ScreenPointToRay(new(Mouse.current.position.x.ReadValue(), Mouse.current.position.y.ReadValue(), 0)), out RaycastHit hit, Mathf.Infinity))

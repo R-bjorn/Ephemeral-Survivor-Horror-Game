@@ -22,7 +22,7 @@ namespace Game_Manager.AI_Scripts.Utility
         /// <summary>
         /// The messages of this component.
         /// </summary>
-        public List<string> Messages { get; private set; } = new();
+        private List<string> Messages { get; set; } = new List<string>();
 
         /// <summary>
         /// Override for custom detail rendering on the automatic GUI.
@@ -52,9 +52,6 @@ namespace Game_Manager.AI_Scripts.Utility
                     return;
                 case Manager.MessagingMode.Unique:
                     Messages = Messages.Where(m => m != message).ToList();
-                    break;
-                case Manager.MessagingMode.All:
-                default:
                     break;
             }
 
