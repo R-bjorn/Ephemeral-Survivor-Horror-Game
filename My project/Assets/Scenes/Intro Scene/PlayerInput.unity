@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.000018600507, g: 0.00000003427671, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18157928, g: 0.223409, b: 0.2852758, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -240,6 +240,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &21491136 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+  m_PrefabInstance: {fileID: 415813126}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &21491137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21491136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e877992b199385b43a81ff68277f4a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unlockCursorKey: 27
 --- !u!1001 &35734689
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5244,12 +5262,7 @@ MonoBehaviour:
   player: {fileID: 1239583564}
   maxDistance: 20
   minDistance: 1
-  audioSource: {fileID: 1344637817}
---- !u!82 &1344637817 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2309507608657417242, guid: e5c1596d975e40f439211b12ccdb050c, type: 3}
-  m_PrefabInstance: {fileID: 9085275690977264963}
-  m_PrefabAsset: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!1001 &1436143054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5607,13 +5620,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512902762}
-  m_LocalRotation: {x: -0.73724467, y: -0.43160552, z: 0.14026478, w: 0.5005126}
+  m_LocalRotation: {x: -0.26498115, y: 0.41881686, z: -0.7021316, w: 0.51126176}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: -141.908, y: 54.267, z: -80.75702}
+  m_LocalEulerAnglesHint: {x: -341.508, y: 57.557, z: 262.34}
 --- !u!1001 &1583142344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7914,6 +7927,10 @@ PrefabInstance:
     - target: {fileID: 4294637247947491135, guid: e5c1596d975e40f439211b12ccdb050c, type: 3}
       propertyPath: m_LocalPosition.y
       value: 57.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473679352753695731, guid: e5c1596d975e40f439211b12ccdb050c, type: 3}
+      propertyPath: Loop
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4473679352753695731, guid: e5c1596d975e40f439211b12ccdb050c, type: 3}
       propertyPath: m_Volume
