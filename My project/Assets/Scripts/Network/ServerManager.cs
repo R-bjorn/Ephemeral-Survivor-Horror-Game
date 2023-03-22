@@ -35,7 +35,9 @@ public class ServerManager : MonoBehaviour
 
         ClientData = new Dictionary<ulong, ClientData>();
 
+        Debug.Log("Starting host");
         NetworkManager.Singleton.StartHost();
+        Debug.Log("Started host");
     }
 
     public void StartServer()
