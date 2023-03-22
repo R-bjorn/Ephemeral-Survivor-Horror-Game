@@ -1,38 +1,42 @@
 using System.Collections.Generic;
 using System.Linq;
-using Game_Manager.AI_Scripts;
+using Game_Manager.Mind.COMP499_Project.Game_Scripts;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+// using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace Game_Manager.IntroScene
 {
-    public class IntroSceneManager : Manager
+    public class IntroSceneManager : ZombieManager
     {
-        private static IntroSceneManager _introSceneSingleton = Singleton as IntroSceneManager;
-        
-        // Serialized private variables for assigning in Unity
+        [Header("Prefabs")]
+        [Tooltip("Prefab for the environment")]
         [SerializeField] private GameObject environmentPrefab;
+        
+        [Tooltip("Prefab for the Player")]
         [SerializeField] private GameObject player;
-        [SerializeField] private Transform playerSpawnLocation;
+
+        [Tooltip("Prefab for pickups")]
         [SerializeField] private List<GameObject> pickupsList;
+        
+        [Tooltip("Transform of the pickup locations")]
         [SerializeField] private List<Transform> pickupLocationsList;
-        [SerializeField] private GameObject enemyObject;
-        // [SerializeField] private State enemyMindControl;
-        [SerializeField] private Transform enemySpawnLocations;
-        [SerializeField] private GameObject playerUI;
+        
+        // [Tooltip("Prefab of UI for the player")]
+        // [SerializeField] private GameObject playerUI;
+        
+        [Tooltip("Transform of the end point of the game.")]
         [SerializeField] private Transform endLocation;
         
-        private GameObject _environmentInstance;
         private GameObject _playerInstance;
-        private Transform _endLocationInstance;
-        private Transform[] EnemySpawnLocation => enemySpawnLocations.GetComponentsInChildren<Transform>();
+
         private readonly List<GameObject> _pickupsInstances = new List<GameObject>();
-        private readonly List<GameObject> _enemiesInstances = new List<GameObject>();
         // private int _score = 0;
 
         protected override void Start()
         {
             Setup();
+            base.Start();
         }
 
         private void Setup()
@@ -40,35 +44,19 @@ namespace Game_Manager.IntroScene
             // Locks the cursor
             Cursor.lockState = CursorLockMode.Locked;
             // Instantiate the environment prefab
-            _environmentInstance = Instantiate(environmentPrefab);
+            Instantiate(environmentPrefab);
 
             // Spawn the player at the player spawn location
-            _playerInstance = Instantiate(player, playerSpawnLocation.position, playerSpawnLocation.rotation);
+            _playerInstance = Instantiate(player, player.transform.position, player.transform.rotation);
 
             // Spawn the end location detector for moving to next scene
-            _endLocationInstance =
-                // ReSharper disable once Unity.InefficientPropertyAccess
-                Instantiate(endLocation, endLocation.transform.position, endLocation.transform.rotation);
+            var transform1 = endLocation.transform;
+            Instantiate(endLocation, transform1.position, transform1.rotation);
             
             // Spawn the pickups at the pre-defined locations
             foreach (var pickupInstance in pickupLocationsList.Select(t => Instantiate(pickupsList[Random.Range(0, pickupsList.Count)], t.position, Quaternion.identity)))
             {
                 _pickupsInstances.Add(pickupInstance);
-            }
-
-            
-            // // Spawn the enemies at the pre-defined locations
-            // foreach (var enemyInstance in EnemySpawnLocation.Select(t => Instantiate(enemyObject, t.position, t.rotation)))
-            // {
-            //     _enemiesInstances.Add(enemyInstance);
-            // }
-            
-            // Spawn the enemies at the pre-defined locations
-            foreach (var enemyInstance in EnemySpawnLocation)
-            {
-                if (enemyInstance == enemySpawnLocations.transform) continue;
-                GameObject enemy = Instantiate(enemyObject, enemyInstance.position, enemyInstance.rotation);
-                _enemiesInstances.Add(enemy);
             }
         }
 
@@ -83,21 +71,8 @@ namespace Game_Manager.IntroScene
         // Function to end the level when the player reaches the end location
         public void EndLevel()
         {
-            // Stop controlling the enemy mind
-            // enemyMindControl.GetComponent<EnemyMindControl>().StopControl();
-
-            // Destroy all remaining pickups and enemies
-            foreach (GameObject pickupInstance in _pickupsInstances)
-            {
-                Destroy(pickupInstance);
-            }
-            foreach (GameObject enemyInstance in _enemiesInstances)
-            {
-                Destroy(enemyInstance);
-            }
-
             // Load the next level
-            SceneManager.LoadScene("Level1.0");
+            // SceneManager.LoadScene("Level1.0");
         }
     }
 }

@@ -12,14 +12,20 @@ public class CharacterSpawner : NetworkBehaviour
     {
         if (!IsServer) { return; }
 
+        Debug.Log("0");
+        // NO CLIENTS FOUND ??
         foreach (var client in ServerManager.Instance.ClientData)
         {
+            Debug.Log("1");
             var character = characterDatabase.GetCharacterById(client.Value.characterId);
+            Debug.Log("2");
             if (character != null)
             {
+                Debug.Log("3");
                 var spawnPos = new Vector3(Random.Range(-3f, 3f), 0f, Random.Range(-3f, 3f));
                 var characterInstance = Instantiate(character.GameplayPrefab, spawnPos, Quaternion.identity);
                 characterInstance.SpawnAsPlayerObject(client.Value.clientId);
+                Debug.Log("4");
                 //characterInstance.SpawnWithOwnership(client.Value.clientId);
             }
         }

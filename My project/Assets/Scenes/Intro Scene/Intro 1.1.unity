@@ -312,28 +312,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mind: {fileID: 11400000, guid: ec4d1b66d01726a4085e7f5ec68a5465, type: 2}
-  maxMessages: 100
-  fleeAcceptableDistance: 0
   seekAcceptableDistance: 0
+  fleeAcceptableDistance: 0
+  restVelocity: 0.1
   navigationRadius: 0
-  pullMaxHeight: 0
-  selectedCamera: {fileID: 0}
-  obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 0
   groundLayers:
     serializedVersion: 2
     m_Bits: 0
-  fixedUpdateAgents: []
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  pullMaxHeight: 0
+  loadLookupTable: 0
   maxAgentsPerUpdate: 0
+  maxMessages: 100
+  detailsWidth: 500
+  controlsWidth: 120
+  followBest: 1
+  selectedCamera: {fileID: 0}
+  paths: 3
+  lookupTable: {fileID: 0}
+  startingHunger: -100
+  maxHunger: 200
+  hungerRestoredFromEating: 100
+  minZombies: 10
+  maxZombies: 30
+  minZombiesSpeed: 5
+  maxZombiesSpeed: 10
+  minZombieLifespan: 300
+  maxZombieLifespan: 600
+  minZombieDetectionRange: 5
+  zombieInteractRadius: 1
+  hungerChance: 0.05
+  zombiePrefab: {fileID: 4981948182919021535, guid: 442e77bc865238a4f90ed1b8919778c3, type: 3}
+  zombieSpawnLocations: {fileID: 3612781488251226827, guid: c6302d64eab1b3441abb0fc5b0776c10, type: 3}
   environmentPrefab: {fileID: 1649057863207487932, guid: 6c7c0a7fe1493944e89b1d1b818eb661, type: 3}
   player: {fileID: 1944705418719062798, guid: 6c317ec3c4df3244dab1da13a1584d04, type: 3}
-  playerSpawnLocation: {fileID: 3014354161995110946, guid: 467ebbfc5956a2747ac104d81a47ba5a, type: 3}
   pickupsList: []
   pickupLocationsList: []
-  enemyObject: {fileID: 4981948182919021535, guid: 442e77bc865238a4f90ed1b8919778c3, type: 3}
-  enemySpawnLocations: {fileID: 3612781488251226827, guid: c6302d64eab1b3441abb0fc5b0776c10, type: 3}
-  playerUI: {fileID: 529115393010607595, guid: e3cde33b4242e644ab7fc12ce38045fe, type: 3}
   endLocation: {fileID: 4329502739111905136, guid: fe2d3606238131e47953de0547001588, type: 3}
 --- !u!4 &902016210
 Transform:

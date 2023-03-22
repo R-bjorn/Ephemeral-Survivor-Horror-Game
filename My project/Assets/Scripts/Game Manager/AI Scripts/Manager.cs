@@ -247,9 +247,9 @@ namespace Game_Manager.AI_Scripts
         [SerializeField]
         private float pullMaxHeight;
 
-        [Tooltip("Lookup table to save and load navigation.")]
-        [SerializeField]
-        private LookupTable lookupTable;
+        // [Tooltip("Lookup table to save and load navigation.")]
+        // [SerializeField]
+        // private LookupTable lookupTable;
 
         [Tooltip("Check to load the lookup data, otherwise new data will be generated and saved.")]
         [SerializeField]
@@ -303,6 +303,10 @@ namespace Game_Manager.AI_Scripts
         )]
         [SerializeField]
         private PathState paths = PathState.Selected;
+        
+        [Tooltip("Lookup table to save and load navigation.")]
+        [SerializeField]
+        private LookupTable lookupTable;
 
         /// <summary>
         /// All cameras in the scene.
@@ -1923,7 +1927,7 @@ namespace Game_Manager.AI_Scripts
                 MoveAgents(_updateAgents);
             }
 
-            // // Click to select an agent.
+            // // // Click to select an agent.
             // if (Mouse.current.leftButton.wasPressedThisFrame && Physics.Raycast(selectedCamera.ScreenPointToRay(new Vector3(Mouse.current.position.x.ReadValue(), Mouse.current.position.y.ReadValue(), 0)), out RaycastHit hit, Mathf.Infinity))
             // {
             //     // See if an agent was actually hit with the click and select it if so.
@@ -1940,11 +1944,11 @@ namespace Game_Manager.AI_Scripts
             //         tr = tr.parent;
             //     } while (tr != null);
             // }
-
-            if (!followBest)
-            {
-                return;
-            }
+            //
+            // if (!followBest)
+            // {
+            //     return;
+            // }
 
             // If locked to following the best agent, select the best agent.
             float best = float.MinValue;
