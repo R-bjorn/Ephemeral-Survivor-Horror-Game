@@ -247,9 +247,9 @@ namespace Game_Manager.AI_Scripts
         [SerializeField]
         private float pullMaxHeight;
 
-        [Tooltip("Lookup table to save and load navigation.")]
-        [SerializeField]
-        private LookupTable lookupTable;
+        // [Tooltip("Lookup table to save and load navigation.")]
+        // [SerializeField]
+        // private LookupTable lookupTable;
 
         [Tooltip("Check to load the lookup data, otherwise new data will be generated and saved.")]
         [SerializeField]
@@ -303,6 +303,10 @@ namespace Game_Manager.AI_Scripts
         )]
         [SerializeField]
         private PathState paths = PathState.Selected;
+        
+        [Tooltip("Lookup table to save and load navigation.")]
+        [SerializeField]
+        private LookupTable lookupTable;
 
         /// <summary>
         /// All cameras in the scene.

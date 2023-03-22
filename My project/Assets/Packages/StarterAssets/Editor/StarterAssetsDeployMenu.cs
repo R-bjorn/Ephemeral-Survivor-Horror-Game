@@ -17,13 +17,13 @@ namespace StarterAssets
 
         // prefab names
         private const string MainCameraPrefabName = "MainCamera";
-        private const string PlayerCapsulePrefabName = "PlayerCapsule";
+        public const string PlayerCapsulePrefabName = "PlayerCapsule";
 
         // names in hierarchy
         private const string CinemachineVirtualCameraName = "PlayerFollowCamera";
 
         // tags
-        private const string PlayerTag = "Player";
+        public const string PlayerTag = "Player";
         private const string MainCameraTag = "MainCamera";
         private const string CinemachineTargetTag = "CinemachineTarget";
 
@@ -40,7 +40,7 @@ namespace StarterAssets
         }
 
 #if STARTER_ASSETS_PACKAGES_CHECKED
-        private static void CheckCameras(Transform targetParent, string prefabFolder)
+        public static void CheckCameras(Transform targetParent, string prefabFolder)
         {
             CheckMainCamera(prefabFolder);
 
@@ -111,7 +111,7 @@ namespace StarterAssets
             serializedObject.ApplyModifiedProperties();
         }
 
-        private static bool TryLocatePrefab(string name, string[] inFolders, System.Type[] requiredComponentTypes, out GameObject prefab, out string path)
+        public static bool TryLocatePrefab(string name, string[] inFolders, System.Type[] requiredComponentTypes, out GameObject prefab, out string path)
         {
             // Locate the player armature
             string[] allPrefabs = AssetDatabase.FindAssets("t:Prefab", inFolders);
@@ -155,7 +155,7 @@ namespace StarterAssets
             return false;
         }
 
-        private static void HandleInstantiatingPrefab(GameObject prefab, out GameObject prefabInstance)
+        public static void HandleInstantiatingPrefab(GameObject prefab, out GameObject prefabInstance)
         {
             prefabInstance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
             Undo.RegisterCreatedObjectUndo(prefabInstance, "Instantiate Starter Asset Prefab");

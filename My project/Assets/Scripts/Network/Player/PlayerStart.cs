@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
+using Network.Player;
 
 public class PlayerStart : NetworkBehaviour
 {
