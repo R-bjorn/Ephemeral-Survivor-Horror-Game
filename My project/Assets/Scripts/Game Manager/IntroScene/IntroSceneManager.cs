@@ -8,6 +8,8 @@ namespace Game_Manager.IntroScene
 {
     public class IntroSceneManager : Manager
     {
+        private static IntroSceneManager _introSceneSingleton = Singleton as IntroSceneManager;
+        
         // Serialized private variables for assigning in Unity
         [SerializeField] private GameObject environmentPrefab;
         [SerializeField] private GameObject player;
@@ -28,7 +30,12 @@ namespace Game_Manager.IntroScene
         private readonly List<GameObject> _enemiesInstances = new List<GameObject>();
         // private int _score = 0;
 
-        private void Start()
+        protected override void Start()
+        {
+            Setup();
+        }
+
+        private void Setup()
         {
             // Locks the cursor
             Cursor.lockState = CursorLockMode.Locked;
@@ -50,14 +57,19 @@ namespace Game_Manager.IntroScene
             }
 
             
+            // // Spawn the enemies at the pre-defined locations
+            // foreach (var enemyInstance in EnemySpawnLocation.Select(t => Instantiate(enemyObject, t.position, t.rotation)))
+            // {
+            //     _enemiesInstances.Add(enemyInstance);
+            // }
+            
             // Spawn the enemies at the pre-defined locations
-            foreach (var enemyInstance in EnemySpawnLocation.Select(t => Instantiate(enemyObject, t.position, t.rotation)))
+            foreach (var enemyInstance in EnemySpawnLocation)
             {
-                _enemiesInstances.Add(enemyInstance);
+                if (enemyInstance == enemySpawnLocations.transform) continue;
+                GameObject enemy = Instantiate(enemyObject, enemyInstance.position, enemyInstance.rotation);
+                _enemiesInstances.Add(enemy);
             }
-
-            // Update the player UI score
-            // playerUI.GetComponent<PlayerUI>().UpdateScore(_score);
         }
 
         // Function to update the player's score when they collect a pickup
@@ -86,10 +98,6 @@ namespace Game_Manager.IntroScene
 
             // Load the next level
             SceneManager.LoadScene("Level1.0");
-        }
-
-        public IntroSceneManager(NavigationLookup[] navigationTable) : base(navigationTable)
-        {
         }
     }
 }

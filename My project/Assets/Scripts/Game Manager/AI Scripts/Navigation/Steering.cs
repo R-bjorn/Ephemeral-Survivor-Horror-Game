@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game_Manager.AI_Scripts
+namespace Game_Manager.AI_Scripts.Navigation
 {
     /// <summary>
     /// Steering behaviours implemented.
@@ -40,6 +40,7 @@ namespace Game_Manager.AI_Scripts
                     return Pursue(position, velocity, targetCurrent, targetLast, speed, deltaTime);
                 case Behaviour.Flee:
                     return Flee(position, velocity, targetCurrent, speed);
+                case Behaviour.Seek:
                 default:
                     return Seek(position, velocity, targetCurrent, speed);
             }
@@ -87,6 +88,7 @@ namespace Game_Manager.AI_Scripts
                     return Color.cyan;
                 case Behaviour.Flee:
                     return Color.red;
+                case Behaviour.Seek:
                 default:
                     return Color.blue;
             }
@@ -113,7 +115,7 @@ namespace Game_Manager.AI_Scripts
         /// <param name="pursuer">The position of the pursuer to flee from.</param>
         /// <param name="speed">The speed at which the agent can move.</param>
         /// <returns>The velocity to apply to the agent to perform the flee.</returns>
-        public static Vector2 Flee(Vector2 position, Vector2 velocity, Vector2 pursuer, float speed)
+        private static Vector2 Flee(Vector2 position, Vector2 velocity, Vector2 pursuer, float speed)
         {
             return (position - pursuer).normalized * speed - velocity;
         }
@@ -128,7 +130,7 @@ namespace Game_Manager.AI_Scripts
         /// <param name="speed">The speed at which the agent can move.</param>
         /// <param name="deltaTime">The time elapsed between when the target is in its current position and its previous.</param>
         /// <returns>The velocity to apply to the agent to perform the pursuit.</returns>
-        public static Vector2 Pursue(Vector2 position, Vector2 velocity, Vector2 evader, Vector2 evaderLastPosition, float speed, float deltaTime)
+        private static Vector2 Pursue(Vector2 position, Vector2 velocity, Vector2 evader, Vector2 evaderLastPosition, float speed, float deltaTime)
         {
             // First calculate the current velocity of evader
             Vector2 evaderVelocity = (evader - evaderLastPosition) / deltaTime;
@@ -150,7 +152,7 @@ namespace Game_Manager.AI_Scripts
         /// <param name="speed">The speed at which the agent can move.</param>
         /// <param name="deltaTime">The time elapsed between when the target is in its current position and its previous.</param>
         /// <returns>The velocity to apply to the agent to perform the evade.</returns>
-        public static Vector2 Evade(Vector2 position, Vector2 velocity, Vector2 pursuer, Vector2 pursuerLastPosition, float speed, float deltaTime)
+        private static Vector2 Evade(Vector2 position, Vector2 velocity, Vector2 pursuer, Vector2 pursuerLastPosition, float speed, float deltaTime)
         {
             // First calculate the current velocity of pursuer
             Vector2 pursuerVelocity = (pursuer - pursuerLastPosition) / deltaTime;

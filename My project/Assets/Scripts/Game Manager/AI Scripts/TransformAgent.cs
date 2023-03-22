@@ -16,9 +16,5 @@ namespace Game_Manager.AI_Scripts
             CalculateMoveVelocity(Time.deltaTime);
             transform.position += MoveVelocity3 * DeltaTime;
         }
-
-        public TransformAgent(Vector2 moveVelocity) : base(moveVelocity)
-        {
-        }
     }
 }

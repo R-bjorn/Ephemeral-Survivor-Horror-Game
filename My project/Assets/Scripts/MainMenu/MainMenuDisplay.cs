@@ -43,4 +43,17 @@ public class MainMenuDisplay : MonoBehaviour
     {
         Debug.Log("Quit");
     }
+
+    public void GoBack()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    
+    
+    
 }
+
+
+
+
+

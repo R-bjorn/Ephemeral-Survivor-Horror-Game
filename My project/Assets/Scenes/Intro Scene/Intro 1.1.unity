@@ -313,6 +313,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mind: {fileID: 11400000, guid: ec4d1b66d01726a4085e7f5ec68a5465, type: 2}
   maxMessages: 100
+  fleeAcceptableDistance: 0
+  seekAcceptableDistance: 0
+  navigationRadius: 0
+  pullMaxHeight: 0
+  selectedCamera: {fileID: 0}
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 0
   fixedUpdateAgents: []
   maxAgentsPerUpdate: 0
   environmentPrefab: {fileID: 1649057863207487932, guid: 6c7c0a7fe1493944e89b1d1b818eb661, type: 3}

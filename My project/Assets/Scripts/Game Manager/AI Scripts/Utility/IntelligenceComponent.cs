@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Game_Manager.AI_Scripts.Utility
 {
     /// <summary>
@@ -10,56 +12,76 @@ namespace Game_Manager.AI_Scripts.Utility
         /// </summary>
         public Agent Agent { get; set; }
 
+        /// <summary>
+        /// The type of this intelligence component.
+        /// </summary>
+        public abstract IntelligenceComponentType Type { get; }
+
+        protected virtual void Awake()
+        {
+            // Find the agent and connect to it.
+            Agent = GetComponentInParent<Agent>();
+            if (Agent == null)
+            {
+                Debug.LogError($"{GetType().Name} must be attached to an agent!");
+            }
+        }
+
         protected virtual void Start()
         {
-            Setup();
+            Initialize();
         }
-    
+
         protected virtual void OnEnable()
         {
-            try
-            {
-                Setup();
-            }
-            catch
-            {
-                // Ignored.
-            }
+            Initialize();
         }
 
         protected virtual void OnDisable()
         {
-            try
-            {
-                Setup();
-            }
-            catch
-            {
-                // Ignored.
-            }
+            // Clean up any resources.
+            Cleanup();
         }
 
         protected virtual void OnDestroy()
         {
-            try
-            {
-                Setup();
-            }
-            catch
-            {
-                // Ignored.
-            }
+            // Clean up any resources.
+            Cleanup();
         }
 
         /// <summary>
-        /// If this was added to the agent later, it won't yet be connected to it, so call the configuration again.
+        /// Initialize this intelligence component.
         /// </summary>
-        private void Setup()
+        protected virtual void Initialize()
         {
-            if (Agent == null)
-            {
-                Manager.RefreshAgents();
-            }
+            // Override this method to perform any initialization.
         }
+
+        /// <summary>
+        /// Clean up any resources used by this intelligence component.
+        /// </summary>
+        protected virtual void Cleanup()
+        {
+            // Override this method to perform any clean up.
+        }
+
+        /// <summary>
+        /// Update the state of this intelligence component.
+        /// </summary>
+        public virtual void UpdateComponent()
+        {
+            // Override this method to update the component.
+        }
+    }
+
+    /// <summary>
+    /// The types of intelligence components.
+    /// </summary>
+    public enum IntelligenceComponentType
+    {
+        Sensor,
+        Actuator,
+        Mind,
+        PerformanceMeasure
     }
 }

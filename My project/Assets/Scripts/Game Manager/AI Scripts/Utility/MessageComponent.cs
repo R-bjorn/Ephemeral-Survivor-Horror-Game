@@ -22,7 +22,7 @@ namespace Game_Manager.AI_Scripts.Utility
         /// <summary>
         /// The messages of this component.
         /// </summary>
-        private List<string> Messages { get; set; } = new List<string>();
+        public List<string> Messages { get; private set; } = new List<string>();
 
         /// <summary>
         /// Override for custom detail rendering on the automatic GUI.
