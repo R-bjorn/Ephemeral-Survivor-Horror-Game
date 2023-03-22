@@ -1,4 +1,5 @@
 using Game_Manager.AI_Scripts;
+using Game_Manager.IntroScene;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -7,17 +8,24 @@ namespace Game_Manager.Mind.COMP499_Project.Game_Scripts
 {
     public class ZombieCharacter : TransformAgent
     {
+
+        public IntroSceneManager.ZombieType ZombieType { get; set; }
+        public float Enery { get; private set; }
+        public float Threat { get; private set; }
         public float Hunger { get; private set; }
         public float Smell { get; private set; }
         public float Hear { get; private set; }
-
         public float LifeSpan { get; private set; }
         public float DetectionRange { get; private set; }
+        public float FearRange { get; private set; }
+        public float LowEneryRange { get; private set; }
         public float HungerRange { get; private set; }
         public float SmellingRange { get; private set; }
         public float HearingRange { get; private set; }
         public float ElapsedLifespan { get; private set; }
-        
+
+        public bool sensedPlayer { get; private set; }
+        public bool sensedZombie { get; private set; }
         public bool DidEat { get; private set; }
         public bool SmellingSomething { get; private set; }
         public bool HearingSomething { get; private set; }
@@ -27,7 +35,9 @@ namespace Game_Manager.Mind.COMP499_Project.Game_Scripts
         private GameObject _targetObject;
         private Player _targetPlayer;
         private ZombieCharacter _targetZombie;
-        
+
+        public bool isTired => Enery < LowEneryRange;
+        public bool sensedThreat => Threat > FearRange;
         public bool IsHungry => Hunger > HungerRange;
         public bool IsSmelling => Smell > SmellingRange;
         public bool IsHearing => Hear > HearingRange;
@@ -63,6 +73,8 @@ namespace Game_Manager.Mind.COMP499_Project.Game_Scripts
                 // Design an Player npc which also runs from zombies. 
             }
         }
+        
+        
 
         public bool KillPlayer()
         {
