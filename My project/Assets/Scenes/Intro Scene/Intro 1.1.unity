@@ -384,90 +384,7 @@ Transform:
   - {fileID: 865888989}
   - {fileID: 1851106804}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &902016208
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 902016210}
-  - component: {fileID: 902016209}
-  m_Layer: 0
-  m_Name: IntroScene Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &902016209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902016208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb07b0628d4bb7140b438939333f0fd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mind: {fileID: 11400000, guid: ec4d1b66d01726a4085e7f5ec68a5465, type: 2}
-  seekAcceptableDistance: 0
-  fleeAcceptableDistance: 0
-  restVelocity: 0.1
-  navigationRadius: 0
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  pullMaxHeight: 0
-  loadLookupTable: 0
-  maxAgentsPerUpdate: 0
-  maxMessages: 100
-  detailsWidth: 500
-  controlsWidth: 120
-  followBest: 1
-  selectedCamera: {fileID: 0}
-  paths: 3
-  lookupTable: {fileID: 0}
-  startingHunger: -100
-  maxHunger: 200
-  hungerRestoredFromEating: 100
-  minZombies: 10
-  maxZombies: 30
-  minZombiesSpeed: 5
-  maxZombiesSpeed: 10
-  minZombieLifespan: 300
-  maxZombieLifespan: 600
-  minZombieDetectionRange: 5
-  zombieInteractRadius: 1
-  hungerChance: 0.05
-  zombiePrefab: {fileID: 4981948182919021535, guid: 442e77bc865238a4f90ed1b8919778c3, type: 3}
-  zombieSpawnLocations: {fileID: 3612781488251226827, guid: c6302d64eab1b3441abb0fc5b0776c10, type: 3}
-  player: {fileID: 1944705418719062798, guid: 6c317ec3c4df3244dab1da13a1584d04, type: 3}
-  pickupsList: []
-  pickupLocationsList: []
-  endLocation: {fileID: 4329502739111905136, guid: fe2d3606238131e47953de0547001588, type: 3}
---- !u!4 &902016210
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902016208}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -315.96576, y: -199.14673, z: 72.159424}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1044257907
 PrefabInstance:
@@ -491,7 +408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3912501753178840572, guid: 6c317ec3c4df3244dab1da13a1584d04, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3912501753178840572, guid: 6c317ec3c4df3244dab1da13a1584d04, type: 3}
       propertyPath: m_LocalPosition.x
@@ -560,7 +477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1649057863207487935, guid: 6c7c0a7fe1493944e89b1d1b818eb661, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1649057863207487935, guid: 6c7c0a7fe1493944e89b1d1b818eb661, type: 3}
       propertyPath: m_LocalPosition.x
@@ -859,7 +776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 529115393010607599, guid: e3cde33b4242e644ab7fc12ce38045fe, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 529115393010607599, guid: e3cde33b4242e644ab7fc12ce38045fe, type: 3}
       propertyPath: m_AnchorMax.x
