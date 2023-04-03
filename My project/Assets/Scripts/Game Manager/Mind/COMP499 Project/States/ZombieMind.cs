@@ -9,10 +9,10 @@ namespace Game_Manager.Mind.COMP499_Project.States
     {
         public override void Enter(Agent agent)
         {
-            // Initial roaming state
+            // // Initial roaming state
             if (agent is null)
                 return;
-            agent.SetState<ZombieRoamingState>();
+            agent.SetState<ZombiePursuingPlayer>();
         }
 
         public override void Execute(Agent agent)

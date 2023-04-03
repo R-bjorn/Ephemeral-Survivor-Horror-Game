@@ -9,9 +9,9 @@ namespace Game_Manager.IntroScene
 {
     public class IntroSceneManager : ZombieManager
     {
-        [Header("Prefabs")]
-        [Tooltip("Prefab for the environment")]
-        [SerializeField] private GameObject environmentPrefab;
+        // [Header("Prefabs")]
+        // [Tooltip("Prefab for the environment")]
+        // [SerializeField] private GameObject environmentPrefab;
         
         [Tooltip("Prefab for the Player")]
         [SerializeField] private GameObject player;
@@ -44,7 +44,7 @@ namespace Game_Manager.IntroScene
             // Locks the cursor
             Cursor.lockState = CursorLockMode.Locked;
             // Instantiate the environment prefab
-            Instantiate(environmentPrefab);
+            // Instantiate(environmentPrefab);
 
             // Spawn the player at the player spawn location
             _playerInstance = Instantiate(player, player.transform.position, player.transform.rotation);
