@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 144908665}
   - component: {fileID: 144908664}
   m_Layer: 5
-  m_Name: Exit
+  m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit
+  m_text: <<
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: af2ddf4745b667c4889560e037da0003, type: 2}
   m_sharedMaterial: {fileID: -5621044391773192478, guid: af2ddf4745b667c4889560e037da0003, type: 2}
@@ -963,7 +963,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Multiplayer
+  m_text: Mute Audio
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: af2ddf4745b667c4889560e037da0003, type: 2}
   m_sharedMaterial: {fileID: -5621044391773192478, guid: af2ddf4745b667c4889560e037da0003, type: 2}
@@ -1343,7 +1343,7 @@ GameObject:
   - component: {fileID: 1181997888}
   - component: {fileID: 1181997887}
   m_Layer: 5
-  m_Name: 'Multiplayer '
+  m_Name: MuteButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1815,7 +1815,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Options
+  m_text: Controls
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: af2ddf4745b667c4889560e037da0003, type: 2}
   m_sharedMaterial: {fileID: -5621044391773192478, guid: af2ddf4745b667c4889560e037da0003, type: 2}
@@ -1982,7 +1982,7 @@ GameObject:
   - component: {fileID: 1380062297}
   - component: {fileID: 1380062296}
   m_Layer: 5
-  m_Name: Options
+  m_Name: Controls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2449,7 +2449,7 @@ GameObject:
   - component: {fileID: 1571818236}
   - component: {fileID: 1571818235}
   m_Layer: 5
-  m_Name: StartGame
+  m_Name: AudioLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3025,7 +3025,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start Game
+  m_text: Audio Level
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: af2ddf4745b667c4889560e037da0003, type: 2}
   m_sharedMaterial: {fileID: -5621044391773192478, guid: af2ddf4745b667c4889560e037da0003, type: 2}
