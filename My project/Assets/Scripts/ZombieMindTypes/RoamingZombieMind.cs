@@ -9,73 +9,63 @@ namespace ZombieMindTypes
         public float detectionRange = 10f;
         public float areaOfExploration = 50f;
 
+        // public float attackingRanage = 2f;
+        
         private NavMeshAgent _agent;
         private Animator _animator;
 
+        private GameObject _player;
+        
         private bool _isPlayerDetected;
         private Vector3 _targetPosition;
-        private bool _isMovingToTarget;
-        private static readonly int Walking = Animator.StringToHash("Walking");
-        private static readonly int Idle = Animator.StringToHash("Idle");
-        private static readonly int Attacking = Animator.StringToHash("Attacking");
-        private static readonly int Running = Animator.StringToHash("Running");
+        private Vector3 PlayerPosition => _player.transform.position;
 
-        void Start()
+        private bool _isMovingToTarget;
+        // private static readonly int Walking = Animator.StringToHash("Walking");
+        // private static readonly int Idle = Animator.StringToHash("Idle");
+        // private static readonly int Attacking = Animator.StringToHash("Attacking");
+        // private static readonly int Running = Animator.StringToHash("Running");
+
+        private void Start()
         {
             _agent = GetComponent<NavMeshAgent>();
-            _animator = GetComponent<Animator>();
+            _player = GameObject.FindGameObjectWithTag("Player");
+            _animator = GetComponentInChildren<Animator>(); 
             _targetPosition = GetRandomPosition();
         }
 
-        void Update()
+        private void Update()
         {
-            if (_isPlayerDetected)
+            if (Vector3.Distance(transform.position, _player.transform.position) <= detectionRange)
             {
                 AttackPlayer();
             }
             else
             {
                 MoveToTarget();
-                DetectPlayer();
             }
         }
 
-        void MoveToTarget()
+        private void MoveToTarget()
         {
             if (!_isMovingToTarget)
             {
                 _agent.SetDestination(_targetPosition);
                 _isMovingToTarget = true;
-                _animator.SetTrigger(Walking);
+                // _animator.SetTrigger(Walking);
             }
-            if (_agent.remainingDistance < 1f)
-            {
-                _targetPosition = GetRandomPosition();
-                _isMovingToTarget = false;
-                _animator.SetTrigger(Idle);
-            }
-        }
 
-        private void DetectPlayer()
-        {
-            var colliders = Physics.OverlapSphere(transform.position, detectionRange);
-            if (colliders.Any(c => c.CompareTag("Player")))
-            {
-                _isPlayerDetected = true;
-                _animator.SetTrigger(Attacking);
-            }
-            else
-            {
-                _isPlayerDetected = false;
-                // _animator.SetTrigger(Idle);
-            }
+            if (!(_agent.remainingDistance < 1f)) return;
+            
+            _targetPosition = GetRandomPosition();
+            _isMovingToTarget = false;
+            // _animator.SetTrigger(Idle);
         }
 
         private void AttackPlayer()
         {
-            _agent.SetDestination(GameObject.FindGameObjectWithTag("Player").transform.position);
-            var distance = Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
-            _animator.SetTrigger(distance < 2f ? Attacking : Running);
+            _agent.SetDestination(PlayerPosition);
+            // _animator.SetTrigger(Vector3.Distance(transform.position, PlayerPosition) < attackingRanage ? Attacking : Running);
         }
 
         private Vector3 GetRandomPosition()
