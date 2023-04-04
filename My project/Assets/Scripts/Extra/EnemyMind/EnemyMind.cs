@@ -16,14 +16,17 @@ namespace Extra.EnemyMind
         public float areaOfExplorationRange = 10f;
 
         // private NavMeshAgent navMeshAgent;
-        private Vector3 startingPosition;
+        private Vector3 _startingPosition;
+        
+        private Animator _animator;
 
         void Start()
         {
             _agent = GetComponent<NavMeshAgent>();
+            _animator = GetComponent<Animator>();
             _player = GameObject.FindGameObjectWithTag("Player").transform;
             _playerDetected = false;
-            startingPosition = transform.position;
+            _startingPosition = transform.position;
             MoveToRandomPosition();
         }
 
@@ -49,7 +52,7 @@ namespace Extra.EnemyMind
         {
             // Generate a random position within the area of exploration range
             Vector3 randomDirection = Random.insideUnitSphere * areaOfExplorationRange;
-            randomDirection += startingPosition;
+            randomDirection += _startingPosition;
             NavMeshHit hit;
             NavMesh.SamplePosition(randomDirection, out hit, areaOfExplorationRange, NavMesh.AllAreas);
 
