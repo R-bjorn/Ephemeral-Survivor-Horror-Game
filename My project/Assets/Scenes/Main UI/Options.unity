@@ -250,7 +250,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 149.1, y: 1}
+  m_AnchoredPosition: {x: 172, y: 1}
   m_SizeDelta: {x: 43.455, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &18783739
@@ -1126,7 +1126,7 @@ GameObject:
   - component: {fileID: 536076627}
   - component: {fileID: 536076628}
   m_Layer: 5
-  m_Name: selectedOption
+  m_Name: selectedControls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1195,7 +1195,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 149.1, y: 1}
+  m_AnchoredPosition: {x: 163, y: -2}
   m_SizeDelta: {x: 43.455, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &567182961
@@ -1247,7 +1247,7 @@ GameObject:
   - component: {fileID: 588635170}
   - component: {fileID: 588635171}
   m_Layer: 5
-  m_Name: selectedExit
+  m_Name: selectedMainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1296,6 +1296,7 @@ GameObject:
   - component: {fileID: 1181997889}
   - component: {fileID: 1181997888}
   - component: {fileID: 1181997887}
+  - component: {fileID: 1181997892}
   m_Layer: 5
   m_Name: MuteButton
   m_TagString: Untagged
@@ -1549,10 +1550,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1181997889}
-        m_TargetAssemblyTypeName: MenuMainUI, Assembly-CSharp
-        m_MethodName: MoveToScene
-        m_Mode: 3
+      - m_Target: {fileID: 1181997892}
+        m_TargetAssemblyTypeName: MuteButton, Assembly-CSharp
+        m_MethodName: MuteAudio
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1569,6 +1570,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1181997885}
   m_CullTransparentMesh: 1
+--- !u!114 &1181997892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181997885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6130cbc132153ec4dbfafb5e43aa4c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1189819923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,7 +1593,7 @@ GameObject:
   - component: {fileID: 1189819924}
   - component: {fileID: 1189819925}
   m_Layer: 5
-  m_Name: selectedMulti
+  m_Name: selectedMute
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2195,7 +2208,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
@@ -2346,7 +2359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 9.400002, y: 1}
+  m_AnchoredPosition: {x: 9.400002, y: -6}
   m_SizeDelta: {x: 43.455, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1611880053
@@ -2421,7 +2434,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 9.400002, y: 1}
+  m_AnchoredPosition: {x: 9.400002, y: -8}
   m_SizeDelta: {x: 43.455, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1710340051
@@ -2654,7 +2667,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 149.1, y: 1}
+  m_AnchoredPosition: {x: 176, y: -8}
   m_SizeDelta: {x: 43.455, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1951047075
