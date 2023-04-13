@@ -98,6 +98,7 @@ namespace Packages.StarterAssets.ThirdPersonController.Scripts
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+        private int _animIDHitByEnemy;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
@@ -174,6 +175,7 @@ namespace Packages.StarterAssets.ThirdPersonController.Scripts
             _animIDJump = Animator.StringToHash("Jump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animIDHitByEnemy = Animator.StringToHash("HitByEnemy");
         }
 
         private void GroundedCheck()
