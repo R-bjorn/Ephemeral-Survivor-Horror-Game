@@ -7,15 +7,16 @@ TagManager:
   - CinemachineTarget
   - Rain
   - SelectedButton
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
+  - Obstacle
+  - Enemy
   - 
   - 
   - 
