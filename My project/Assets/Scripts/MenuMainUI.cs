@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class MenuMainUI : MonoBehaviour
 {
@@ -49,5 +50,16 @@ public class MenuMainUI : MonoBehaviour
     {
         // if(Popup)
         Application.Quit();
+    }
+
+    bool muted = false;
+    public TextMeshProUGUI muteAudioText;
+
+    public void MuteAudio ()
+    {
+        muted = !muted;
+        AudioListener.volume = muted ? 0 : 1;
+        muteAudioText = GetComponentInChildren<TextMeshProUGUI>();
+        muteAudioText.text = muted  ? "Restore Audio" : "Mute Audio" ;
     }
 }
