@@ -8,6 +8,7 @@ namespace Scenes.Loading_Screen
 {
     public class LoadingPanel : MonoBehaviour
     {
+        public string loadSceneText;
         public Image progressBar;
         public TextMeshProUGUI  loadingText;
         private bool switchFlip;
@@ -18,7 +19,7 @@ namespace Scenes.Loading_Screen
 
         IEnumerator LoadScene()
         {
-            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Intro 1.1");
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(loadSceneText);
 
             while (!asyncLoad.isDone)
             {
