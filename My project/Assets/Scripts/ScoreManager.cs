@@ -7,7 +7,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get; private set; } // Singleton instance
 
     public int score; // player score
-    public int numCrystalsToWin = 5; // number of keys player needs to win
+    public int numCrystalsToWin = 3; // number of keys player needs to win
 
     private void Awake()
     {
