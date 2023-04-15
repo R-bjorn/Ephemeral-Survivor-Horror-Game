@@ -1,48 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace Game_Manager.Mind.Game_Scripts
 {
-    // Player stats
-    public int health = 100;
-    public int maxHealth = 200;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Player : MonoBehaviour
     {
-        
-    }
+        // Player stats
+        public int health = 100;
+        public int maxHealth = 200;
+        public TextMeshProUGUI healthCounter;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void TakeDamage(int damage)
-    {
-        // Reduce health
-        health -= damage;
-
-        // Check if player is dead
-        if (health <= 0)
+        // Start is called before the first frame update
+        void Start()
         {
-            Die();
+            InvokeRepeating("ReduceHealth", 1f, 1f);
         }
-    }
 
-    public void Die()
-    {
-        // Player death
-        throw new System.NotImplementedException();
-    }
+        // Update is called once per frame
+        void Update()
+        {
+        
+        }
+    
+        private void ReduceHealth()
+        {
+            health -= 1;
+            healthCounter.text = health.ToString();
+        }
 
-    public void Heal(int amount)
-    {
-        Debug.Log(health);
-        // Increase health, but not above max health
-        health = Mathf.Min(health + amount, maxHealth);
-        Debug.Log(health);
+        public void TakeDamage(int damage)
+        {
+            // Reduce health
+            health -= damage;
+
+            // Check if player is dead
+            if (health <= 0)
+            {
+                Die();
+            }
+        }
+
+        public void Die()
+        {
+            // Player death
+            throw new System.NotImplementedException();
+        }
+
+        public void Heal(int amount)
+        {
+            Debug.Log(health);
+            // Increase health, but not above max health
+            health = Mathf.Min(health + amount, maxHealth);
+            Debug.Log(health);
+        }
     }
 }
