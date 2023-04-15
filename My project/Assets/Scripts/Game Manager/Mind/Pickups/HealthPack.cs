@@ -23,9 +23,11 @@ public class HealthPack : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Contact");
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
+                Debug.Log("Heal");
                 player.Heal(healthPackValue);
                 Destroy(gameObject);
             }
