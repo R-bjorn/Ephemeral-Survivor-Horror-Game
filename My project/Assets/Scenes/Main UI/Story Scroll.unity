@@ -550,11 +550,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-    But no utopia lasts forever. One day, an elemental demon of great
-    power and malice took the land by force. The Scourge enslaved Perpetua''s populace,
-    banished its protectors, and hunted down the Artificers to near extinction.'
+  m_text: But no utopia lasts forever. One day, an elemental demon of great power
+    and malice took the land by force. The Scourge enslaved Perpetua's populace,
+    banished its protectors, and hunted down the Artificers to near extinction.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: af2ddf4745b667c4889560e037da0003, type: 2}
   m_sharedMaterial: {fileID: -5621044391773192478, guid: af2ddf4745b667c4889560e037da0003, type: 2}
@@ -911,7 +909,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: It was known as Perpetua.
+  m_text: This realm was known as Perpetua.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: af2ddf4745b667c4889560e037da0003, type: 2}
   m_sharedMaterial: {fileID: -5621044391773192478, guid: af2ddf4745b667c4889560e037da0003, type: 2}
