@@ -16,4 +16,4 @@ MonoBehaviour:
   displayName: Ben
   icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   introPrefab: {fileID: 3535571018491481204, guid: 31feba9ea98abda449868276ad55c981, type: 3}
-  gameplayPrefab: {fileID: -8671038594395029814, guid: cf4b730d0d2a96049a93411134061cfc, type: 3}
+  gameplayPrefab: {fileID: -8671038594395029814, guid: eec07b44f3e05524e9aaaf7fa811315f, type: 3}
