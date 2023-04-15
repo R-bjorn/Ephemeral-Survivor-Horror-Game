@@ -23,7 +23,8 @@ public class Crystal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ScoreManager.Instance.AddScore(scoreValue);
+            ScoreManager.Instance.AddScore(crystalValue);
             Destroy(gameObject);
         }
+    }
 }

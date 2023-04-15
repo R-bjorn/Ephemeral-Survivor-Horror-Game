@@ -45,13 +45,4 @@ public class Player : MonoBehaviour
         health = Mathf.Min(health + amount, maxHealth);
         Debug.Log(health);
     }
-
-    public void AddCrystal(int amount)
-    {
-        crystalsFound += crystalsToFind;
-        if (crystalsFound == crystalsToFind)
-        {
-            // Enough crystals
-        }
-    }
 }
