@@ -23,20 +23,7 @@ public class Crystal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Player player = other.GetComponent<Player>();
-            if (player != null)
-            {
-                player.addScore(crystalValue);
-                Destroy(gameObject);
-            }
-            else
-            {
-
-            }
+            ScoreManager.Instance.AddScore(scoreValue);
+            Destroy(gameObject);
         }
-        else
-        {
-
-        }
-    }
 }
