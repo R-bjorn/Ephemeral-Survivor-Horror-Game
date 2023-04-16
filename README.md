@@ -1,41 +1,37 @@
-# Game-Demo
+# COMP-4990 Project Group 19 --> Survival Horror Video Game: "Ephemeral"
 ## Introduction
-> This is the game demo for the **`action-adventurous game`** that we are building for the class COMP 4990 : Project Management. Here we are trying to create a game for gamers to enjoy and play with there friends. 
+> This is the repo for the **`survival horror video game`** we built for the class COMP-4990 : Project Management.
 > 
-> This project management has two terms, We talked with the professor and made an outline to first gather information about the game genre, the assets we will be using for the game such as characters, environmental assets, audio assets and network assets. 
+> This project was carried out through two terms. 
 
 ## Game Specification 
 ### Game Genre:
-> Action-Adventure Survivor Horror Game
+> Action-Adventure Survivor Horror
 
 ### Game Mode: 
 > Single Player or Multiplayer
 
-### Game Designing and Developing:
-> The game will be developed in Unity game engine using C# programming language. The game will be developed for PC and console platforms.
-> - Third-person perspective
-> - Realistic graphics with high-quality textures
-> - Smooth gameplay mechanics
-> - Intuitive user interface
+### Game Design and Development:
+> This game was developed in the Unity game engine, and using C# programming. It was designed for PC platforms.
 
 ### Gameplay:
-> The gameplay will be divided into three different but connected levels. Each level will have its own unique environment, enemies, and challenges. The game can be played in single-player or multiplayer mode.
-> - Player has to explore the game world to collect pieces of antidote to save the infected world.
-> - The game is divided into 3 levels, each level having a unique environment and challenges.
-> - The player must complete the objectives in each level to progress to the next level.
-> - The game will feature both indoor and outdoor environments with various obstacles, puzzles, and traps.
-> - There will be a variety of enemies in each level, each with unique strengths and weaknesses.
-> - Player/s have to fight/save the main enemy after exploring all 3 levels.
+> The initial plan was for the game to be divided into three different levels, each level with its own unique environment, enemies, and challenges. In the end, we decided to limit it to 1 tutorial level and 1 main level for the alpha version of the game.
+> The game is meant to be playable both as a single player and in multiplayer mode.
+> - Player has to explore the game world, collecting power crystals while avoiding demon enemies.
+> - In the tutorial, the player must collect power crystals, avoid demon minions, and find Artificer to complete the level.
+> - In single-player mode, the player must collect enough power crystals and then find the Scourge to win the game.
+> - In multiplayer mode, the players must collect enough power crystals between them, and then find and defeat the Scourge's three Generals
+> - In addition to the main enemies, there are a variety of minion enemies in each level, each with unique strengths and weaknesses.
+> - There are also items that can be collected by players to give them single-use weapons or temporary power-ups.
 
 ## Storyline for the game. 
 ### Story Modes:
 
-> - `Single-player mode`: In this mode, the player will take on the role of a survivor who is immune to the virus and has been tasked with finding the pieces of the antidote to save humanity.
-> - `Multiplayer mode`: In this mode, players can team up with friends to complete the game's objectives and fight/save the main enemy.
-> 
-> The world has been infected by a deadly virus, and the player/s must explore the game world to collect pieces of an antidote to save the infected world. The game is set in a post-apocalyptic world, where the player/s must face various challenges and enemies to find the pieces of the antidote.
-> 
-> This is the breif introduction of the game story that we will be using to develop this game. There will be different levels as a player gets along with the game. A player can connect with other players online to play this game in a multiplayer mode where they can make a server with other users to develop a fun experience for the game.  
+> - `Single-player mode`: The realm of Perpetua has been forcefully enslaved by the elemental demon Scourge. Artificer, last of Perpetua's old rulers, has summoned the Champion to liberate his world. The Champion must gain strength by gathering power crystals until they can successfully face the Scourge and take it down - but they must be careful to avoid Scourge's minions if they don't want to become enslaved as well.
+
+> - `Multiplayer mode`: The realm of Perpetua has been forcefully enslaved by the elemental demon Scourge. Artificer, last of Perpetua's old rulers, has summoned the 3 Champions to liberate his world. The Champions must gain strength by gathering power crystals until they can successfully face the Scourge's Generals and take them down - but they must be careful to avoid Scourge's minions until then if they don't want to become enslaved as well.
+
+> - A player can connect with other players online to play this game in a multiplayer mode where they can make a server with other users to develop a fun experience for the game.  
 
 <details><summary>The Top-down view of the storyline</summary>
  
@@ -45,8 +41,7 @@
 ## Designing and Development
 ### Environment:
 > The game world will be a post-apocalyptic environment with a dark and eerie atmosphere. The environment will be filled with abandoned buildings, ruins, and hazardous areas. The environment will be designed to create a sense of danger and tension.
-> 
-> I have already downloaded all the free assets we will be using for the game environment from unity asset store. I have been also designing all the required natural phenomena to make the game feel more realistic. 
+
 > - The game world will feature different environments in each level, including urban, rural, and industrial settings.
 > - Each environment will be designed to immerse the player in the post-apocalyptic world, with destructed buildings, abandoned vehicles, and other debris.
 > - Each level will have unique challenges and obstacles that the player must overcome, including puzzles and traps.
@@ -70,11 +65,6 @@
 > **Options** : This button will direct the player to move to a different UI scene where player can get the knowledge of how to move the character and other options that are connected to the game and player. 
 > 
 > **Exit** : Clicking exit quits the game.
-
-### Levels: (Not fully designed yet)
-> - Level 1: Urban setting with abandoned buildings, cars, and other debris. Player has to collect the first piece of the antidote from a research center.
-> - Level 2: Rural setting with forests and farmland. Player has to collect the second piece of the antidote from a farm where the virus originated.
-> - Level 3: Industrial setting with factories and warehouses. Player has to collect the final piece of the antidote from a secret lab hidden within a factory.
 
 #### Procedural Rules for Generating Levels:
 > - Each level will be designed to be challenging and immersive, with unique objectives and environments.
