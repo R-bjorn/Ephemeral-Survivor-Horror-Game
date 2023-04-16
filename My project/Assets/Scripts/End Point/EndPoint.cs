@@ -11,7 +11,14 @@ namespace End_Point
         {
             if (other.CompareTag("Player"))
             {
-                SceneManager.LoadScene(newSceneName);
+                if (ScoreManager.Instance.score == ScoreManager.Instance.numCrystalsToWin)
+                {
+                    SceneManager.LoadScene(newSceneName);
+                }
+                else
+                {
+                    Debug.Log("You must find more crystals to win!");
+                }
             }
         }
     }
