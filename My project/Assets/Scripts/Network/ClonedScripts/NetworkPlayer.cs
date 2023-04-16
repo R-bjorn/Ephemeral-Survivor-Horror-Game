@@ -4,7 +4,7 @@ using Unity.Netcode;
 
 namespace Game_Manager.Mind.Game_Scripts
 {
-    public class NetworkPlayerStats : NetworkBehaviour
+    public class NetworkPlayer : NetworkBehaviour
     {
         // Player stats
         public int health = 100;
@@ -14,8 +14,6 @@ namespace Game_Manager.Mind.Game_Scripts
         // Start is called before the first frame update
         void Start()
         {
-            GameObject healthCounterObject = GameObject.Find("Health Count");
-            healthCounter = healthCounterObject.GetComponent<TextMeshProUGUI>();
             InvokeRepeating("ReduceHealth", 1f, 1f);
         }
 
