@@ -1,6 +1,6 @@
 # COMP-4990 Project Group 19 --> Survival Horror Video Game: "Ephemeral"
 ## Introduction
-> This is the repo for the **`survival horror video game`** we're building for the class COMP-4990 : Project Management.
+> This is the repo for the **`survival horror video game`** we built for the class COMP-4990 : Project Management.
 > 
 > This project was carried out through two terms. 
 
@@ -65,11 +65,6 @@
 > **Options** : This button will direct the player to move to a different UI scene where player can get the knowledge of how to move the character and other options that are connected to the game and player. 
 > 
 > **Exit** : Clicking exit quits the game.
-
-### Levels: (Not fully designed yet)
-> - Level 1: Urban setting with abandoned buildings, cars, and other debris. Player has to collect the first piece of the antidote from a research center.
-> - Level 2: Rural setting with forests and farmland. Player has to collect the second piece of the antidote from a farm where the virus originated.
-> - Level 3: Industrial setting with factories and warehouses. Player has to collect the final piece of the antidote from a secret lab hidden within a factory.
 
 #### Procedural Rules for Generating Levels:
 > - Each level will be designed to be challenging and immersive, with unique objectives and environments.
