@@ -1218,11 +1218,52 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8974912156866352587, guid: 8b9495c5087cb104696976f355df882a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5779442640157369531, guid: 8b9495c5087cb104696976f355df882a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 509851278}
+    - targetCorrespondingSourceObject: {fileID: 5779442640157369531, guid: 8b9495c5087cb104696976f355df882a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 509851277}
   m_SourcePrefab: {fileID: 100100000, guid: 8b9495c5087cb104696976f355df882a, type: 3}
+--- !u!1 &509851276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5779442640157369531, guid: 8b9495c5087cb104696976f355df882a, type: 3}
+  m_PrefabInstance: {fileID: 509851275}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &509851277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509851276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3722818846
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &509851278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509851276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 077bd5511e127cd4f976a2e05680cb0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newSceneName: LoadingEnd
 --- !u!1001 &550818063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1666,6 +1707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   numCrystalsToWin: 3
+  crystalCounter: {fileID: 0}
 --- !u!4 &776961751
 Transform:
   m_ObjectHideFlags: 0

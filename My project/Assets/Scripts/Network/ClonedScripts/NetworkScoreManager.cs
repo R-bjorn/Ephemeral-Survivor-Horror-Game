@@ -29,16 +29,4 @@ public class NetworkScoreManager : NetworkBehaviour
         crystalCounter.text = score.ToString();
         //CheckWinCondition(); // Check if the player has won the game
     }
-
-    /*
-    private void CheckWinCondition()
-    {
-        if (score >= numKeysToWin) // Check if the player has collected enough coins to win
-        {
-            Time.timeScale = 0f; // Pause the game
-            Debug.Log("won");
-            // winMessage.SetActive(true); // Show the win message
-        }
-    }
-    */
 }

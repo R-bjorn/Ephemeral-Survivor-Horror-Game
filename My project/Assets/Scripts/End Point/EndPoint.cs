@@ -11,7 +11,7 @@ namespace End_Point
         {
             if (other.CompareTag("Player"))
             {
-                if (ScoreManager.Instance.score == ScoreManager.Instance.numCrystalsToWin)
+                if (ScoreManager.Instance.score >= 3)
                 {
                     SceneManager.LoadScene(newSceneName);
                 }
