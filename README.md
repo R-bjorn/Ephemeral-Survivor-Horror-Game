@@ -1,6 +1,6 @@
 # Game-Demo
 ## Introduction
-> This is the game demo for the **`action-adventureous game`** that we are building for the class COMP 4990 : Project Management. Here we are trying to create a game for gamers to enjoy and play with there friends. 
+> This is the game demo for the **`action-adventurous game`** that we are building for the class COMP 4990 : Project Management. Here we are trying to create a game for gamers to enjoy and play with there friends. 
 > 
 > This project management has two terms, We talked with the professor and made an outline to first gather information about the game genre, the assets we will be using for the game such as characters, environmental assets, audio assets and network assets. 
 
