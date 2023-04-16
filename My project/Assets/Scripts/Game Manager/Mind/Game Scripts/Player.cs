@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game_Manager.Mind.Game_Scripts
 {
@@ -26,6 +27,12 @@ namespace Game_Manager.Mind.Game_Scripts
         {
             health -= 1;
             healthCounter.text = health.ToString();
+
+            // Check if player is dead
+            if (health <= 0)
+            {
+                Die();
+            }
         }
 
         public void TakeDamage(int damage)
@@ -43,7 +50,8 @@ namespace Game_Manager.Mind.Game_Scripts
         public void Die()
         {
             // Player death
-            throw new System.NotImplementedException();
+            Debug.Log("You Died!");
+            SceneManager.LoadScene("UI");
         }
 
         public void Heal(int amount)
