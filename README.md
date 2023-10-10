@@ -1,4 +1,16 @@
 # COMP-4990 Project Group 19 --> Survival Horror Video Game: "Ephemeral"
+
+<div style="display:flex;">
+ <img src="https://github.com/R-bjorn/Game-Demo/assets/81584201/9aee8062-9e8b-4012-9f70-8c667a24448e" height=270/>
+ <img src="https://github.com/R-bjorn/Game-Demo/assets/81584201/39199313-a835-49d4-adc0-47ad1de23acc" height=270/>
+ 
+ <img src="https://github.com/R-bjorn/Game-Demo/assets/81584201/231a5048-96eb-4bdf-bfc7-ecf14e05ecfd" height=270/>
+ <img src="https://github.com/R-bjorn/Game-Demo/assets/81584201/be3257b9-443d-4200-bb29-679a2c76d753" height=270/>
+
+
+</div>
+
+
 ## Introduction
 > This is the repo for the **`survival horror video game`** we built for the class COMP-4990 : Project Management.
 > 
